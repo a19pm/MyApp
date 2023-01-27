@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Iconly/Curved/Time Square</title>
+    <g id="Raw-File" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home" transform="translate(-211.000000, -196.000000)">
+            <g id="Iconly/Curved/Time-Square" transform="translate(211.000000, 196.000000)">
+                <path d="M0,0 L28,0 L28,28 L0,28 L0,0 Z" id="Iconly/Curved/Time-Square-(Background)"></path>
+                <g id="Time-Square" transform="translate(3.208496, 3.208984)" stroke="#FFFFFF" stroke-dasharray="0,0" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75">
+                    <path d="M10.7916679,21.5833359 C18.8848353,21.5833359 21.5833359,18.8848353 21.5833359,10.7916679 C21.5833359,2.69850055 18.8848353,0 10.7916679,0 C2.69850055,0 0,2.69850055 0,10.7916679 C0,18.8848353 2.69850055,21.5833359 10.7916679,21.5833359 Z" id="Stroke-1"></path>
+                    <path d="M14.7466943,13.1452656 L10.7905273,10.7850991 L10.7905273,5.69726562" id="Stroke-3"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

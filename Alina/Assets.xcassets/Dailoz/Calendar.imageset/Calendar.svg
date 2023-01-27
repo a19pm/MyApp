@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Iconly/Curved/Calendar</title>
+    <g id="Raw-File" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Task" transform="translate(-270.000000, -135.000000)">
+            <g id="Group-36" transform="translate(270.000000, 133.000000)">
+                <g id="Iconly/Curved/Calendar" transform="translate(0.000000, 2.000000)">
+                    <path d="M0,0 L14,0 L14,14 L0,14 L0,0 Z" id="Iconly/Curved/Calendar-(Background)"></path>
+                    <g id="Calendar" transform="translate(1.604004, 1.195312)" stroke="#525F77" stroke-dasharray="0,0" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.875">
+                        <path d="M5.40983375,0.84765625 C9.46750057,0.84765625 10.8202505,2.1998231 10.8202505,6.25748968 C10.8202505,10.3151563 9.46750057,11.6673231 5.40983375,11.6673231 C1.35275022,11.6673231 0,10.3151563 0,6.25748968 C0,2.1998231 1.35275022,0.84765625 5.40983375,0.84765625 Z" id="Stroke-1"></path>
+                        <line x1="0.160644531" y1="4.24283856" x2="10.6653109" y2="4.24283856" id="Stroke-3"></line>
+                        <line x1="7.97947137" y1="6.53971356" x2="7.98472136" y2="6.53971356" id="Stroke-5"></line>
+                        <line x1="5.41306512" y1="6.53971356" x2="5.41831511" y2="6.53971356" id="Stroke-7"></line>
+                        <line x1="2.84177606" y1="6.53971356" x2="2.84702605" y2="6.53971356" id="Stroke-9"></line>
+                        <line x1="7.97947137" y1="8.78580731" x2="7.98472136" y2="8.78580731" id="Stroke-11"></line>
+                        <line x1="5.41306512" y1="8.78580731" x2="5.41831511" y2="8.78580731" id="Stroke-13"></line>
+                        <line x1="2.84177606" y1="8.78580731" x2="2.84702605" y2="8.78580731" id="Stroke-15"></line>
+                        <line x1="7.74869794" y1="0" x2="7.74869794" y2="1.90283334" id="Stroke-17"></line>
+                        <line x1="3.07682294" y1="0" x2="3.07682294" y2="1.90283334" id="Stroke-19"></line>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
