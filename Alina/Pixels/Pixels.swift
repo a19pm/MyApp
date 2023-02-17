@@ -196,7 +196,9 @@ struct Headlines: View {
           Text("Read more on technology")
                      .font(.system(size: 16, weight: .medium, design: .rounded))
                      .foregroundColor(.color("0077B6"))
-                     .padding(.horizontal, 76).padding(.top, 14).padding(.bottom, 20)
+                     //.padding(.horizontal, 76)
+                     .padding(.top, 14).padding(.bottom, 20)
+                     .frame (maxWidth : .infinity)
                      .background(.color("96D3F2").opacity(0.1), in: Rectangle())
                      .cornerRadius(12)
           
@@ -209,7 +211,9 @@ struct Headlines: View {
           Text("Read more on technology")
                      .font(.system(size: 16, weight: .medium, design: .rounded))
                      .foregroundColor(.color("0077B6"))
-                     .padding(.horizontal, 76).padding(.top, 14).padding(.bottom, 20)
+                     //.padding(.horizontal, 76)
+                     .padding(.top, 14).padding(.bottom, 20)
+                     .frame(maxWidth : .infinity)
                      .background(.color("96D3F2").opacity(0.1), in: Rectangle())
                      .cornerRadius(12)
           
