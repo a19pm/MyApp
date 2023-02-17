@@ -148,19 +148,21 @@ struct SummaryStats: View {
             Text("Today Daily").font(.system(size: 17, weight: .medium, design: .rounded))
               .foregroundColor(.black)
               .padding(.leading, 15)
-            HStack(spacing: 50){
+            HStack(spacing: 0){
               VStack(alignment: .leading){
                 Text("15").font(.system(size: 35, weight: .medium, design: .rounded))
                   .foregroundColor(.black)
                 Text("Read").font(.system(size: 17, weight: .medium, design: .rounded))
                   .foregroundColor(.color("A1A1A1"))
               }
+              Spacer()
               VStack{
                 Text("5").font(.system(size: 35, weight: .medium, design: .rounded))
                   .foregroundColor(.black)
                 Text("Favourite").font(.system(size: 17, weight: .medium, design: .rounded))
                   .foregroundColor(.color("A1A1A1"))
               }
+              Spacer()
               VStack{
                 Text("23").font(.system(size: 35, weight: .medium, design: .rounded))
                   .foregroundColor(.black)
