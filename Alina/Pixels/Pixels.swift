@@ -167,28 +167,24 @@ struct Headlines: View {
             Text("Search")
               .font(.system(size: 17, weight: .medium, design: .rounded))
               .foregroundColor(.color("CDCDCD"))
-              .padding(.trailing, 141).padding(.leading, 149).padding(.top, 17).padding(.bottom, 18)
+             // .padding(.trailing, 141).padding(.leading, 149)
+              .padding(.top, 17)
+              .padding(.bottom, 18)
+              .frame(maxWidth: .infinity)
               .background(.color("E8E8E8").opacity(0.25), in: Rectangle())
               .cornerRadius(12)
               .padding(.top, 24.83)
               .padding(.bottom, 28)
           
           HStack{
-            Text("LATEST")
-              .font(.system(size: 13, weight: .medium, design: .rounded))
-              .foregroundColor(.color("0077B6"))
+            Topics(text: "LATEST")
             Spacer()
-            Text("INDONESIA")
-              .font(.system(size: 13, weight: .medium, design: .rounded))
-              .foregroundColor(.color("CDCDCD"))
+            Topics(text: "INDONESIA")
             Spacer()
-            Text("TECHNOLOGY")
-              .font(.system(size: 13, weight: .medium, design: .rounded))
-              .foregroundColor(.color("CDCDCD"))
+            Topics(text: "TECHNOLOGY")
             Spacer()
-            Text("WORLD")
-              .font(.system(size: 13, weight: .medium, design: .rounded))
-              .foregroundColor(.color("CDCDCD"))
+            Topics(text: "WORLD")
+            
           }
           
           VStack(spacing: 26){
@@ -230,3 +226,20 @@ struct Headlines_Previews: PreviewProvider {
   }
 }
 
+
+struct Topics: View {
+  var text : String
+  @State var isSelected = false
+  var body: some View {
+    HStack {
+      Button {
+        isSelected.toggle()
+      } label: {
+        Text(text)
+          .font(.system(size: 13, weight: .medium, design: .rounded))
+          .foregroundColor(isSelected ? .color("0077B6") : .color("CDCDCD"))
+      }
+    }
+  }
+  
+}
