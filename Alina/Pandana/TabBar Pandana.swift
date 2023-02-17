@@ -10,22 +10,22 @@ import SwiftUI
 struct TabItemData {
   let image: String
   let selectedImage: String
-  //let title: String
+  // let title: String
 }
+
 struct TabItemView: View {
   let data: TabItemData
   let isSelected: Bool
   let hasNotifications: Bool
-  
-  
+
   var body: some View {
     ZStack {
       Image(isSelected ? data.selectedImage : data.image)
-        
-      //.padding(.top, 20)
-      //Spacer()
-      
-      //Text(data.title)
+
+      // .padding(.top, 20)
+      // Spacer()
+
+      // Text(data.title)
       // .foregroundColor(isSelected ? .black : .gray)
       // .font(.system(size: 14))
     }.frame(width: 52, height: 52).background {
@@ -38,20 +38,17 @@ struct TabItemView: View {
           .overlay(Circle().stroke(Color.color("FFFFFF"), lineWidth: 1))
           .frame(width: 9)
           .offset(x: 5, y: -14)
-          
       }
     }
-    
   }
 }
 
 struct TabBottomView: View {
-  
   let tabbarItems: [TabItemData]
-  
+
   var width: CGFloat = UIScreen.main.bounds.width - 30
   @Binding var selectedIndex: Int
-  
+
   var body: some View {
     HStack(alignment: .center) {
       ForEach(tabbarItems.indices) { index in
@@ -67,18 +64,18 @@ struct TabBottomView: View {
         }
       }
     }.padding(.horizontal, 25)
-    .frame(width: width, height: 63)
-    .background(Color.color("F5F6F7"))
+      .frame(width: width, height: 63)
+      .background(Color.color("F5F6F7"))
       .cornerRadius(31.5)
-    //.shadow(radius: 5, x: 0, y: 4)
+    // .shadow(radius: 5, x: 0, y: 4)
   }
 }
+
 struct CustomTabView<Content: View>: View {
-  
   let tabs: [TabItemData]
   @Binding var selectedIndex: Int
   @ViewBuilder let content: (Int) -> Content
-  
+
   var body: some View {
     ZStack {
       content(selectedIndex)
@@ -86,16 +83,17 @@ struct CustomTabView<Content: View>: View {
         Spacer()
         TabBottomView(tabbarItems: tabs, selectedIndex: $selectedIndex)
       }
-      //.padding(.bottom, 8)
+      // .padding(.bottom, 8)
     }
   }
 }
+
 enum TabType: Int, CaseIterable {
   case movies = 0
   case myfavourite
   case notifications
   case profile
-  
+
   var tabItem: TabItemData {
     switch self {
     case .movies:
@@ -106,21 +104,20 @@ enum TabType: Int, CaseIterable {
       return TabItemData(image: "i 3", selectedImage: "i 6")
     case .profile:
       return TabItemData(image: "i 4", selectedImage: "i 7")
-      
     }
   }
 }
+
 struct MainTabView: View {
-  
   @State var selectedIndex: Int = 0
-  
+
   var body: some View {
-    CustomTabView(tabs: TabType.allCases.map({ $0.tabItem }), selectedIndex: $selectedIndex) { index in
+    CustomTabView(tabs: TabType.allCases.map { $0.tabItem }, selectedIndex: $selectedIndex) { index in
       let type = TabType(rawValue: index) ?? .movies
       getTabView(type: type)
     }
   }
-  
+
   @ViewBuilder
   func getTabView(type: TabType) -> some View {
     switch type {
@@ -144,6 +141,6 @@ struct MainTab_Previews: PreviewProvider {
 
 struct Hello: View {
   var body: some View {
-    VStack{}
+    VStack {}
   }
 }

@@ -9,8 +9,8 @@ import SwiftUI
 
 struct TrailerScreen: View {
   var body: some View {
-    VStack(){
-      HStack{
+    VStack {
+      HStack {
         Image("i 34")
         Spacer()
         Image("i 35")
@@ -22,7 +22,6 @@ struct TrailerScreen: View {
       .padding(.leading, 26)
       .padding(.trailing, 25)
       .background(.black)
-    
   }
 }
 

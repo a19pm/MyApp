@@ -10,6 +10,7 @@ struct NotificationsScreen: View {
   enum Tab {
     case update, message, promo
   }
+
   struct N: View {
     var notifivation: String
     let tab: Tab
@@ -27,11 +28,11 @@ struct NotificationsScreen: View {
           .background(isSelected ? .color("3544C4") : .clear)
           .cornerRadius(isSelected ? 6 : 0)
           .shadow(color: isSelected ? .color("3544C4").opacity(0.6) : .clear, radius: 34, x: 10, y: 32)
-          //.padding(.leading, isSelected ? 9 : 0)
-          
+        // .padding(.leading, isSelected ? 9 : 0)
       }
     }
   }
+
   @State var tab: Tab = .update
   var body: some View {
     ScrollView {
@@ -67,7 +68,7 @@ struct NotificationsScreen: View {
             N(notifivation: "Update", tab: .update, selectedTab: $tab)
             N(notifivation: "Message", tab: .message, selectedTab: $tab)
             N(notifivation: "Promo", tab: .promo, selectedTab: $tab)
-          }.padding(.vertical, 4 ).padding(.leading, 4)
+          }.padding(.vertical, 4).padding(.leading, 4)
             .padding(.trailing, 4)
             .background(.white, in: RoundedRectangle(cornerRadius: 10))
             .padding(.top, 16)
@@ -86,9 +87,10 @@ struct NotificationsScreen_Previews: PreviewProvider {
     NotificationsScreen()
   }
 }
+
 struct Update: View {
   var body: some View {
-    VStack{
+    VStack {
       VStack(alignment: .leading, spacing: 30) {
         HStack(alignment: .top, spacing: 14) {
           Image("i 59")
@@ -118,7 +120,6 @@ struct Update: View {
                 .shadow(color: .color("616161").opacity(0.7), radius: 74, x: 0, y: 32)
               Image("i 61")
             }
-            
           }
         }
         Rectangle().frame(height: 2).foregroundColor(.color("DEE2EE"))
@@ -153,11 +154,12 @@ struct Update: View {
               .overlay(RoundedRectangle(cornerRadius: 4).stroke(.color("DEE2EE"), lineWidth: 1))
           }
         }
-        
+
       }.padding(.horizontal, 29).padding(.top, 30)
-    }//
+    } //
   }
 }
+
 struct N: View {
   var notifivation: String
   @Binding var isSelected: Bool
@@ -173,8 +175,7 @@ struct N: View {
         .background(isSelected ? .color("3544C4") : .clear)
         .cornerRadius(isSelected ? 6 : 0)
         .shadow(color: isSelected ? .color("3544C4").opacity(0.6) : .clear, radius: 34, x: 10, y: 32)
-        //.padding(.leading, isSelected ? 9 : 0)
-        
+      // .padding(.leading, isSelected ? 9 : 0)
     }
   }
 }
@@ -194,12 +195,11 @@ struct SearchScreen: View {
     Tags.Item(text: "Korean Film"),
   ]
   var threeColumnGrid = [GridItem(), GridItem()]
-  
+
   var body: some View {
     ScrollView {
-      
       VStack(alignment: .leading, spacing: 15) {
-        HStack{
+        HStack {
           Text("Popular Tags")
             .font(.system(size: 19, weight: .regular, design: .default))
             .foregroundColor(.color("1C2238").opacity(1))
@@ -207,7 +207,7 @@ struct SearchScreen: View {
           Spacer()
         }
         VStack(alignment: .leading, spacing: 12) {
-          LazyHGrid (rows: threeColumnGrid, alignment: .top, spacing: 12) {
+          LazyHGrid(rows: threeColumnGrid, alignment: .top, spacing: 12) {
             ForEach(tag) { item in
               Tags(item: item, list: $tag)
             }
@@ -220,7 +220,7 @@ struct SearchScreen: View {
 //            Tags(text: "Family Friendly", isSelected: true)
 //          }
         }
-        HStack{
+        HStack {
           Text("Recently Search")
             .font(.system(size: 19, weight: .regular, design: .default))
             .foregroundColor(.color("1C2238").opacity(1))
@@ -242,14 +242,14 @@ struct SearchScreen: View {
             Recently(item: item, list: $recent)
           }
         }
-        
+
       }.padding(.leading, 30)
         .padding(.top, 22)
         .padding(.trailing, 28)
-      
+
     }.safeAreaInset(edge: .top) {
       HStack(spacing: 16) {
-      Image("i 63")
+        Image("i 63")
         Text("try “Dilan 2012”")
           .font(.system(size: 16, weight: .regular, design: .default))
           .foregroundColor(.color("616161").opacity(0.5))
@@ -260,7 +260,7 @@ struct SearchScreen: View {
         .padding(.vertical, 23)
         .background(.white)
         .cornerRadius(10)
-      .padding(.top, 10)
+        .padding(.top, 10)
         .padding(.bottom, 27)
         .padding(.horizontal, 24)
         .background(.color("F5F6F7"))
@@ -274,7 +274,7 @@ struct SearchScreen_Previews: PreviewProvider {
   }
 }
 
-//struct Tags: View {
+// struct Tags: View {
 //  var text: String
 //  var isSelected: Bool
 //  var body: some View {
@@ -294,62 +294,62 @@ struct SearchScreen_Previews: PreviewProvider {
 //
 //
 //  }
-//}
+// }
 struct Tags: View {
   struct Item: Identifiable {
     var id = UUID()
     var text: String
   }
-  //var isSelected: Bool
+
+  // var isSelected: Bool
   var item: Item
   var list: Binding<[Item]>
   @State var isSelected = false
   var body: some View {
-    Button{
+    Button {
       isSelected.toggle()
     } label: {
       HStack(spacing: 5) {
-              Text(item.text)
-                .font(.system(size: 12, weight: .regular, design: .default))
-                .foregroundColor(.color("616161").opacity(1))
-                .multilineTextAlignment(.leading)
-              //Spacer()
-              Button {
-                withAnimation {
-                  list.wrappedValue.removeAll(where: { item in
-                    item.id == self.item.id
-                  })
-                }
-              } label: {
-                Image("i 65")
-              }
-            }//.frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: .infinity)
-            .multilineTextAlignment(.leading)
-              .padding(.vertical, 10)
-                .padding(.leading, 15)
-                .padding(.trailing, 10)
-                .background(.white)
-                .cornerRadius(4)
-                
-                .overlay(RoundedRectangle(cornerRadius: 4).stroke(isSelected ? .clear : .color("979797"), lineWidth: 0.5))
-                .shadow(color: isSelected ? .color("35405A").opacity(0.3) : .clear, radius: 24, x: 0, y: 22)
-                .padding(.bottom, 48)
+        Text(item.text)
+          .font(.system(size: 12, weight: .regular, design: .default))
+          .foregroundColor(.color("616161").opacity(1))
+          .multilineTextAlignment(.leading)
+        // Spacer()
+        Button {
+          withAnimation {
+            list.wrappedValue.removeAll(where: { item in
+              item.id == self.item.id
+            })
+          }
+        } label: {
+          Image("i 65")
+        }
+      } // .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: .infinity)
+      .multilineTextAlignment(.leading)
+      .padding(.vertical, 10)
+      .padding(.leading, 15)
+      .padding(.trailing, 10)
+      .background(.white)
+      .cornerRadius(4)
+
+      .overlay(RoundedRectangle(cornerRadius: 4).stroke(isSelected ? .clear : .color("979797"), lineWidth: 0.5))
+      .shadow(color: isSelected ? .color("35405A").opacity(0.3) : .clear, radius: 24, x: 0, y: 22)
+      .padding(.bottom, 48)
     }
-      
-        
-    
   }
 }
+
 struct Recently: View {
   struct Item: Identifiable {
     var id = UUID()
     var text: String
   }
+
   var item: Item
   var list: Binding<[Item]>
   var body: some View {
     VStack(spacing: 23) {
-      HStack{
+      HStack {
         Text(item.text)
           .font(.system(size: 19, weight: .semibold, design: .default))
           .foregroundColor(.color("1C2238").opacity(1))
@@ -388,12 +388,12 @@ struct SearchResultScreen: View {
         FilmCard(image: "i 69", name: "Spesial Joker", producer: "Put on a happies Face", rate: 4.6, genre: "Horror", hours: "1h 50m", isSecondGenre: true, genre2: "Action")
         FilmCard(image: "i 70", name: "Special movie", producer: "R A W", rate: 4.4, genre: "Horror", hours: "2h 37m", isSecondGenre: false, genre2: "1")
       }.padding(.horizontal, 29).padding(.top, 13)
-      
+
     }.safeAreaInset(edge: .top) {
       HStack {
         VStack(alignment: .leading, spacing: 30) {
           HStack(spacing: 16) {
-          Image("i 63")
+            Image("i 63")
             Text("European Films")
               .font(.system(size: 16, weight: .regular, design: .default))
               .foregroundColor(.color("616161").opacity(0.5))
@@ -404,26 +404,25 @@ struct SearchResultScreen: View {
             .padding(.vertical, 23)
             .background(.white)
             .cornerRadius(10)
-         
+
           HStack(spacing: 14) {
-            Button{
+            Button {
               isSelectedFilter.toggle()
             } label: {
               Image("i 67")
                 .renderingMode(isSelectedFilter ? .template : .original)
-                .foregroundColor(isSelectedFilter ? . white : .black)
-                            .frame(height: 34)
-                            .padding(.horizontal, 8).padding(.leading, 2)
-                            .background(isSelectedFilter ? .color("3544C4") : .color("FFFFFF"))
-                            .cornerRadius(6)
-                            .shadow(color: isSelectedFilter ? .color("3544C4").opacity(0.6) : .color("35405A").opacity(0.3) , radius: isSelectedFilter ? 34 : 24, x: isSelectedFilter ? 10 : 0, y: isSelectedFilter ? 32 : 22)
+                .foregroundColor(isSelectedFilter ? .white : .black)
+                .frame(height: 34)
+                .padding(.horizontal, 8).padding(.leading, 2)
+                .background(isSelectedFilter ? .color("3544C4") : .color("FFFFFF"))
+                .cornerRadius(6)
+                .shadow(color: isSelectedFilter ? .color("3544C4").opacity(0.6) : .color("35405A").opacity(0.3), radius: isSelectedFilter ? 34 : 24, x: isSelectedFilter ? 10 : 0, y: isSelectedFilter ? 32 : 22)
             }
-            
-              
+
             ForEach(sort) { item in
               Sort(item: item, list: $sort)
             }
-          }//.padding(.top, 16)
+          } // .padding(.top, 16)
         }
         Spacer()
       }.padding(.top, 10)
@@ -445,51 +444,52 @@ struct Sort: View {
     var id = UUID()
     var text: String
   }
+
   var item: Item
   var list: Binding<[Item]>
-  
+
   @State var isSelected = false
- // var text : String
+  // var text : String
   var body: some View {
-      HStack(spacing: 8.68) {
-        Button {
-          isSelected.toggle()
-        } label: {
-          Text(item.text)
-                    .font(.system(size: 12, weight: .semibold, design: .default))
-                    .foregroundColor(isSelected ? .color("FFFFFF") : .color("616161"))
-                  if isSelected {
-                    Button {
-                      withAnimation {
-                        list.wrappedValue.removeAll(where: { item in
-                          item.id == self.item.id
-                        })
-                      }
-                    } label: {
-                      Image("i 71")
-                    }
-                  }
-                }.frame(height: 34)
-                .padding(.horizontal, isSelected ? 10 : 14)
-                .padding(.trailing, isSelected ? 0 : 3)
-                .background(isSelected ? .color("3544C4") : .color("FFFFFF"))
-                .cornerRadius(6)
-                .shadow(color: isSelected ? .color("3544C4").opacity(0.6) : .color("35405A").opacity(0.3) , radius: isSelected ? 34 : 24, x: isSelected ? 10 : 0, y: isSelected ? 32 : 22)
+    HStack(spacing: 8.68) {
+      Button {
+        isSelected.toggle()
+      } label: {
+        Text(item.text)
+          .font(.system(size: 12, weight: .semibold, design: .default))
+          .foregroundColor(isSelected ? .color("FFFFFF") : .color("616161"))
+        if isSelected {
+          Button {
+            withAnimation {
+              list.wrappedValue.removeAll(where: { item in
+                item.id == self.item.id
+              })
+            }
+          } label: {
+            Image("i 71")
+          }
         }
-        
+      }.frame(height: 34)
+        .padding(.horizontal, isSelected ? 10 : 14)
+        .padding(.trailing, isSelected ? 0 : 3)
+        .background(isSelected ? .color("3544C4") : .color("FFFFFF"))
+        .cornerRadius(6)
+        .shadow(color: isSelected ? .color("3544C4").opacity(0.6) : .color("35405A").opacity(0.3), radius: isSelected ? 34 : 24, x: isSelected ? 10 : 0, y: isSelected ? 32 : 22)
     }
   }
+}
 
 struct Recently45: View {
   struct Item: Identifiable {
     var id = UUID()
     var text: String
   }
+
   var item: Item
   var list: Binding<[Item]>
   var body: some View {
     VStack(spacing: 23) {
-      HStack{
+      HStack {
         Text(item.text)
           .font(.system(size: 19, weight: .semibold, design: .default))
           .foregroundColor(.color("1C2238").opacity(1))
