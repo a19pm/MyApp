@@ -8,96 +8,164 @@
 import SwiftUI
 
 struct MovieDetailScreem: View {
+  @State var close = false
+  @State var show = false
+  @State var book = false
   var body: some View {
-    ZStack {
-      ScrollView{
-        VStack{
-        VStack(alignment: .leading, spacing: 0){
-          Image("i 23")
-          ZStack(alignment: .topTrailing){
-            Image("Movie Poster")
-              .background(.clear)
-              .overlay(RoundedRectangle(cornerRadius: 22).stroke(.color("FFFFFF").opacity(0.08), lineWidth: 9 ))
-              .shadow(color: .color("19142C").opacity(0.43), radius: 74, x: 0, y: 62)
-            Image("i 20")
-              .rotationEffect(.degrees(5))
-              .offset(x: 35, y: 12)
-          }.frame(maxWidth: .infinity)
-            .padding(.top, 33)
-            .padding(.bottom, 44)
-          Text("The handmaid's Ema")
-            .font(.system(size: 30, weight: .heavy, design: .default))
-            .foregroundColor(.white)
-            .kerning(0.5)
-          HStack(alignment: .center, spacing: 0){
-            Text("Horror")
-            Circle().frame(width: 5)
-              .padding(.leading, 4).padding(.trailing, 8)
-            Text("18+")
-            Circle().frame(width: 5)
-              .padding(.leading, 2).padding(.trailing, 9)
-            Image("i 21")
-            Text("4.5").font(.system(size: 12, weight: .medium, design: .default))
-              .padding(.leading, 6)
-          }.font(.system(size: 16, weight: .regular, design: .default))
-            .foregroundColor(.color("979797"))
-            .padding(.top, 9)
-            .padding(.bottom, 39)
-          HStack(spacing: 0){
-            VStack(alignment: .leading, spacing: 8){
-              Text("Length")
-                .font(.system(size: 12, weight: .regular, design: .default))
-                .foregroundColor(.white).opacity(0.43)
-              Text("1h 44m")
-                .font(.system(size: 14, weight: .semibold, design: .default))
-                .foregroundColor(.white)
-            }
-            Rectangle().frame(width: 1, height: 39)
-              .foregroundColor(.white).opacity(0.14)
-              .padding(.leading, 17.5)
-              .padding(.trailing, 25.5)
-            VStack(alignment: .leading, spacing: 8){
-              Text("Language")
-                .font(.system(size: 12, weight: .regular, design: .default))
-                .foregroundColor(.white).opacity(0.43)
-              Text("Indonesian")
-                .font(.system(size: 14, weight: .semibold, design: .default))
-                .foregroundColor(.white)
-            }
-            Rectangle().frame(width: 1, height: 39)
-              .foregroundColor(.white).opacity(0.14)
-              .padding(.leading, 20.5)
-              .padding(.trailing, 19.5)
-            
-            VStack(alignment: .leading, spacing: 8){
-              Text("Review")
-                .font(.system(size: 12, weight: .regular, design: .default))
-                .foregroundColor(.white).opacity(0.43)
-              HStack(alignment: .lastTextBaseline){
-                Text("+44")
-                  .font(.system(size: 14, weight: .semibold, design: .default))
-                  .foregroundColor(.white)
-                Image("i 22")
+    ZStack{
+      ZStack {
+        VStack (spacing: 0){
+          VStack{
+            VStack(alignment: .leading, spacing: 0){
+              Button {
+                close.toggle()
+              } label: {
+                Image("i 23")
               }
               
+              ZStack(alignment: .topTrailing){
+                Image("Movie Poster")
+                  .background(.clear)
+                  .overlay(RoundedRectangle(cornerRadius: 22).stroke(.color("FFFFFF").opacity(0.08), lineWidth: 9 ))
+                  .shadow(color: .color("19142C").opacity(0.43), radius: 74, x: 0, y: 62)
+                Image("i 20")
+                  .rotationEffect(.degrees(5))
+                  .offset(x: 35, y: 12)
+              }.frame(maxWidth: .infinity)
+                .padding(.top, 33)
+                .padding(.bottom, 44)
+              Text("The handmaid's Ema")
+                .font(.system(size: 30, weight: .heavy, design: .default))
+                .foregroundColor(.white)
+                .kerning(0.5)
+              HStack(alignment: .center, spacing: 0){
+                Text("Horror")
+                Circle().frame(width: 5)
+                  .padding(.leading, 4).padding(.trailing, 8)
+                Text("18+")
+                Circle().frame(width: 5)
+                  .padding(.leading, 2).padding(.trailing, 9)
+                Image("i 21")
+                Text("4.5").font(.system(size: 12, weight: .medium, design: .default))
+                  .padding(.leading, 6)
+              }.font(.system(size: 16, weight: .regular, design: .default))
+                .foregroundColor(.color("979797"))
+                .padding(.top, 9)
+                .padding(.bottom, 39)
+              HStack(spacing: 0){
+                VStack(alignment: .leading, spacing: 8){
+                  Text("Length")
+                    .font(.system(size: 12, weight: .regular, design: .default))
+                    .foregroundColor(.white).opacity(0.43)
+                  Text("1h 44m")
+                    .font(.system(size: 14, weight: .semibold, design: .default))
+                    .foregroundColor(.white)
+                }
+                Rectangle().frame(width: 1, height: 39)
+                  .foregroundColor(.white).opacity(0.14)
+                  .padding(.leading, 17.5)
+                  .padding(.trailing, 25.5)
+                VStack(alignment: .leading, spacing: 8){
+                  Text("Language")
+                    .font(.system(size: 12, weight: .regular, design: .default))
+                    .foregroundColor(.white).opacity(0.43)
+                  Text("Indonesian")
+                    .font(.system(size: 14, weight: .semibold, design: .default))
+                    .foregroundColor(.white)
+                }
+                Rectangle().frame(width: 1, height: 39)
+                  .foregroundColor(.white).opacity(0.14)
+                  .padding(.leading, 20.5)
+                  .padding(.trailing, 19.5)
+                
+                VStack(alignment: .leading, spacing: 8){
+                  Text("Review")
+                    .font(.system(size: 12, weight: .regular, design: .default))
+                    .foregroundColor(.white).opacity(0.43)
+                  HStack(alignment: .lastTextBaseline){
+                    Text("+44")
+                      .font(.system(size: 14, weight: .semibold, design: .default))
+                      .foregroundColor(.white)
+                    Image("i 22")
+                  }
+                  
+                }
+              }.padding(.leading, 33)
+                .padding(.top, 24)
+                .padding(.trailing, 29)
+                .padding(.bottom, 29)
+                .background(.white.opacity(0.11))
+                .cornerRadius(11)
+              
+              
             }
-          }.padding(.leading, 33)
-            .padding(.top, 24)
-            .padding(.trailing, 29)
-            .padding(.bottom, 29)
-            .background(.white.opacity(0.11))
-            .cornerRadius(11)
-          
-          
+          }.padding(.horizontal, 30)
+            .padding(.top, 21)
+            .padding(.bottom, 11)
+          if !self.show{
+            BottomSheet(showSettings: $show)//.padding(.horizontal, -30)
+          }
         }
-      }.padding(.horizontal, 30)
-        .padding(.top, 21)
-        .padding(.bottom, 33)
-        BottomSheet()//.padding(.horizontal, -30)
+        
+      }.background {
+        BackgroundMovie()
       }
-      
-    }.background {
-      BackgroundMovie()
+      if self.close {
+          //Spacer()
+          GeometryReader { _ in
+            HomeScreen()
+          }//.frame(maxWidth: .infinity)
+          //.frame(alignment: .trailing)
+//              .padding(.leading, 182)
+//              .padding(.top, 123)
+          .background {
+            Color.black.opacity(0)
+              .edgesIgnoringSafeArea(.all)
+              .onTapGesture {
+                withAnimation {
+                  self.close.toggle()
+                }
+              }
+          }
+      }
+      if self.show {
+          //Spacer()
+          GeometryReader { _ in
+            BottomSheet(showSettings: $show)
+              .safeAreaInset(edge: .bottom) {
+                 Bac(text: "BOOK NOW", bookNow: $book)
+               }.edgesIgnoringSafeArea(.bottom)
+          }.frame(maxWidth: .infinity)
+          //.frame(alignment: .trailing)
+          .background {
+            Color.black.opacity(0)
+              .edgesIgnoringSafeArea(.all)
+              .onTapGesture {
+                withAnimation{
+                  self.show.toggle()
+                }
+              }
+          }
+      }
+      if self.book {
+          //Spacer()
+          GeometryReader { _ in
+            TicketScreen()
+          }//.frame(maxWidth: .infinity)
+          //.frame(alignment: .trailing)
+//              .padding(.leading, 182)
+           .padding(.top, -35)
+          .frame(maxHeight: .infinity)
+          .background {
+            Color.black.opacity(0)
+              .edgesIgnoringSafeArea(.all)
+              .onTapGesture {
+                withAnimation {
+                  self.book.toggle()
+                }
+              }
+          }
+      }
     }
   }
 }
@@ -123,8 +191,8 @@ struct BackgroundMovie2: View {
     ZStack {
       
       //Image("i 19").resizable().frame(width: 348)
-      Rectangle()
-        .fill(LinearGradient(colors: [.color("2A0718"), .color("2A0718").opacity(0.3)], startPoint: .top, endPoint: .bottom)).frame(width: 348).cornerRadius(18)
+//      Rectangle()
+//        .fill(LinearGradient(colors: [.color("2A0718"), .color("2A0718").opacity(0.3)], startPoint: .top, endPoint: .bottom)).frame(width: 348).cornerRadius(18)
     }//.frame(width: 348)//.ignoresSafeArea()
     .frame(maxWidth: .infinity)
       .background(.black)
@@ -132,16 +200,26 @@ struct BackgroundMovie2: View {
 }
  
 struct BottomSheet: View {
+  @Binding var showSettings: Bool
+  
   var body: some View {
     
-    ScrollView{
       VStack(spacing: 0){
+        Button {
+          showSettings.toggle()
+        } label: {
+          Rectangle().frame(width: 48, height: 4).foregroundColor(.color("8A93A7"))
+                   .cornerRadius(8)
+        }
+       
         Text("Mark Your Calendar")
           .font(.system(size: 20, weight: .semibold, design: .default))
           .foregroundColor(.color("35405A"))
           .padding(.bottom, 24)
           .padding(.horizontal, 24)
+          .padding(.top, 16)
         Rectangle().frame(height: 1).foregroundColor(.color("DEE2EE"))
+        ScrollView{
           //.padding(.leading, -24)
         ScrollView(.horizontal){
           HStack(spacing: 14){
@@ -183,58 +261,74 @@ struct BottomSheet: View {
         }.padding(.top, 37)
           .padding(.horizontal, 22)
         Hall().padding(.horizontal, 22)//.padding(.trailing, 24)
-        
-      }.padding(.top, 31)
+        Spacer()
+          
+      }//
       //.padding(.leading, 24)
-        .background(.white)
-        .cornerRadius(18, corners: [.topRight, .topLeft])
+ 
       
-    }
-    .padding(.top, 22)
-    .background(BackgroundMovie2())
-    .safeAreaInset(edge: .bottom) {
-      Bac(text: "BOOK NOW")
-    }.edgesIgnoringSafeArea(.bottom)
+    }.padding(.top, 16)
+      .background(.white)
+      .cornerRadius(18, corners: [.topRight, .topLeft])
+      .edgesIgnoringSafeArea(.bottom)
+      .padding(.top, 22)
+    //.background(BackgroundMovie2())
+   // .safeAreaInset(edge: .bottom) {
+      //Bac(text: "BOOK NOW")
+    //}.edgesIgnoringSafeArea(.bottom)
   }
 }
-struct BottomSheet_Previews: PreviewProvider {
-  static var previews: some View {
-    BottomSheet()
-  }
-}
+//struct BottomSheet_Previews: PreviewProvider {
+//  static var previews: some View {
+//    BottomSheet()
+//  }
+//}
 struct Bac: View {
   var text: String
+  @Binding var bookNow: Bool
   var body: some View {
-    VStack{
-      Text(text)
-        .ignoresSafeArea()
-        .font(.system(size: 16, weight: .semibold, design: .default))
-        .foregroundColor(.white)
-        .frame(width: 316, height: 55)
-        .background(.color("C70C3C"))
-        .cornerRadius(27.5)
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 14)
-        .background(.white)
-        .overlay(RoundedRectangle(cornerRadius: 1)
-          .stroke(.color("BFD2E5"), lineWidth: 1 ))
+    Button{
+      bookNow.toggle()
+    }label: {
+      VStack{
+        Text(text)
+          .ignoresSafeArea()
+          .font(.system(size: 16, weight: .semibold, design: .default))
+          .foregroundColor(.white)
+          .frame(width: 316, height: 55)
+          .background(.color("C70C3C"))
+          .cornerRadius(27.5)
+          .frame(maxWidth: .infinity)
+          .padding(.vertical, 14)
+          .background(.white)
+          .overlay(RoundedRectangle(cornerRadius: 1)
+            .stroke(.color("BFD2E5"), lineWidth: 1 ))
         
-    }.shadow(color: .color("35405A").opacity(0.19), radius: 64, x: 0, y: -13)
+      }.shadow(color: .color("35405A").opacity(0.19), radius: 64, x: 0, y: -13)
+    }
   }
 }
   
 struct DateView: View {
   var date: String
   var month: String
-  var isSelected: Bool
+  //var isSelected: Bool
+  @State var isSelected = false
   var body: some View {
+  
     VStack(alignment: .center, spacing: 10){
-      Text(date)
-        .font(.system(size: 23, weight: .semibold, design: .default))
-        .foregroundColor(isSelected ? .white : .color("35405A"))
-      Text(month)
-        .font(.system(size: 13, weight: .regular, design: .default))
-        .foregroundColor(isSelected ? .white : .color("35405A"))
+      Button{
+        isSelected.toggle()
+      } label: {
+        VStack(alignment: .center, spacing: 10){
+          Text(date)
+            .font(.system(size: 23, weight: .semibold, design: .default))
+            .foregroundColor(isSelected ? .white : .color("35405A"))
+          Text(month)
+            .font(.system(size: 13, weight: .regular, design: .default))
+            .foregroundColor(isSelected ? .white : .color("35405A"))
+        }
+      }
     }.frame(width: 65, height: 80)
       .background(isSelected ? .color("3544C4") : .color("F5F6F7"))
       .cornerRadius(9)
@@ -245,12 +339,17 @@ struct DateView: View {
   }
 struct TimeView: View {
   var time: String
-  var isSelected: Bool
+  //var isSelected: Bool
+  @State var isSelected = false
   var body: some View {
     VStack{
-      Text(time)
-            .font(.system(size: 12, weight: .regular, design: .default))
-            .foregroundColor(isSelected ? .white : .color("616161"))
+      Button{
+        isSelected.toggle()
+      } label: {
+        Text(time)
+          .font(.system(size: 12, weight: .regular, design: .default))
+          .foregroundColor(isSelected ? .white : .color("616161"))
+      }
     }.frame(width: 87, height: 34)
       .background(isSelected ? .color("3544C4") : .white)
       .cornerRadius(6)
@@ -539,7 +638,7 @@ struct TicketScreen: View {
       }.padding(.horizontal, 30)
       
       
-    }
+    }.background(.white)
   }
 }
 struct TicketScreen_Previews: PreviewProvider {

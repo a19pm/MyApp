@@ -8,83 +8,118 @@
 import SwiftUI
 
 struct Pending: View {
+  @State var show = false
+  @State var returnBack = false
+  @State var showCalendar = false
   var body: some View {
-    ScrollView{
-      VStack(alignment: .leading, spacing: 0){
-        HStack{
-          Image("Image 26")
-            .padding(.horizontal, 20.5)
-            .padding(.top, 18)
-            .padding(.bottom, 16)
-              .background(.white)
-              .cornerRadius(14)
-              .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-          Spacer()
-          Text("Pending")
-            .font(.system(size: 18, weight: .medium, design: .rounded))
-            .padding(.trailing, 48)
-          Spacer()
+    ZStack{
+      ScrollView{
+        VStack(alignment: .leading, spacing: 0){
+          UpView(title: "Pending", returnBackProfile: $returnBack, showCalendar: $showCalendar)
+          HStack(spacing: 17){
+            Image("Image 31")
+            Text("May 2021")
+              .font(.system(size: 20, weight: .medium, design: .rounded))
+          }.padding(.bottom, 25)
+          Text("14 May 2021")
+            .font(.system(size: 14, weight: .medium, design: .rounded))
+            .foregroundColor(.color("525F77"))
+            .padding(.bottom, 22)
+            .padding(.leading, -8)
+          ScrollView(.horizontal){
+            HStack{
+              Button(action: {
+                withAnimation{
+                  show.toggle()
+                }
+              }, label: {
+                CardPending(name: "Cleaning Clothes", color: .color("8F99EB"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("EEF0FF"))
+              })
+              CardPending(name: "Cleaning Clothes", color: .color("8F99EB"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("EEF0FF"))
+            }
+          }.padding(.trailing, -24)
+            .padding(.bottom, 25)
+          Text("15 May 2021")
+            .font(.system(size: 14, weight: .medium, design: .rounded))
+            .foregroundColor(.color("525F77"))
+            .padding(.bottom, 22)
+            .padding(.leading, -8)
+
+          ScrollView(.horizontal){
+            HStack{
+              CardPending(name: "Cleaning Clothes", color: .color("8F99EB"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("EEF0FF"))
+              CardPending(name: "Cleaning Clothes", color: .color("8F99EB"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("EEF0FF"))
+            }
+          }.padding(.trailing, -24)
+            .padding(.bottom, 25)
+          Text("16 May 2021")
+            .padding(.bottom, 22)
+            .font(.system(size: 14, weight: .medium, design: .rounded))
+            .foregroundColor(.color("525F77"))
+            .padding(.leading, -8)
+          ScrollView(.horizontal){
+            HStack{
+              CardPending(name: "Cleaning Clothes", color: .color("8F99EB"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("EEF0FF"))
+              CardPending(name: "Cleaning Clothes", color: .color("8F99EB"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("EEF0FF"))
+            }
+          }.padding(.trailing, -24)
+        }.padding(.horizontal,24)
+      }
+      if self.show {
+        //Spacer()
+        GeometryReader { _ in
+          PendingPopUp()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+        .padding(.leading, 60)
+        .padding(.top, 280)
+        .background {
+          Color.black.opacity(0)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+              withAnimation {
+                self.show.toggle()
+              }
+            }
         }
-        HStack{
-          HStack(spacing: 15){
-                  Image("Search1")
-                  Text("Search for task")
-                    .font(.system(size: 14, weight: .medium, design: .default))
-                    .foregroundColor(.color("C8CDD9"))
-                  Spacer()
-                  Image("Image 29")
-                }.padding(.horizontal, 20)
-                  .padding(.vertical, 15)
-                .background(.color("F6F6F6"), in: Rectangle()).cornerRadius(15)
-          Image("Image 30")
-            .padding(13)
-            .background(.color("F6F6F6"))
-            .cornerRadius(15)
-        }.padding(.top, 31)
-          .padding(.bottom, 23)
-        HStack(spacing: 17){
-          Image("Image 31")
-          Text("May 2021")
-            .font(.system(size: 20, weight: .medium, design: .rounded))
-        }.padding(.bottom, 25)
-        Text("14 May 2021")
-          .font(.system(size: 14, weight: .medium, design: .rounded))
-          .foregroundColor(.color("525F77"))
-          .padding(.bottom, 22)
-          .padding(.leading, -8)
-        ScrollView(.horizontal){
-          HStack{
-            CardPending(name: "Cleaning Clothes", color: .color("8F99EB"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("EEF0FF"))
-            CardPending(name: "Cleaning Clothes", color: .color("8F99EB"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("EEF0FF"))
-          }
-        }.padding(.trailing, -24)
-          .padding(.bottom, 25)
-        Text("15 May 2021")
-          .font(.system(size: 14, weight: .medium, design: .rounded))
-          .foregroundColor(.color("525F77"))
-          .padding(.bottom, 22)
-          .padding(.leading, -8)
-        ScrollView(.horizontal){
-          HStack{
-            CardPending(name: "Cleaning Clothes", color: .color("8F99EB"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("EEF0FF"))
-            CardPending(name: "Cleaning Clothes", color: .color("8F99EB"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("EEF0FF"))
-          }
-        }.padding(.trailing, -24)
-          .padding(.bottom, 25)
-        Text("16 May 2021")
-          .padding(.bottom, 22)
-          .font(.system(size: 14, weight: .medium, design: .rounded))
-          .foregroundColor(.color("525F77"))
-          .padding(.leading, -8)
-        ScrollView(.horizontal){
-          HStack{
-            CardPending(name: "Cleaning Clothes", color: .color("8F99EB"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("EEF0FF"))
-            CardPending(name: "Cleaning Clothes", color: .color("8F99EB"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("EEF0FF"))
-          }
-        }.padding(.trailing, -24)
-      }.padding(.horizontal,24)
-    }
-    
+      }
+      if self.returnBack {
+        //Spacer()
+        GeometryReader { _ in
+         Home()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+//        .padding(.leading, 64)
+//        .padding(.top, 280)
+        .background {
+          Color.black.opacity(0)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.returnBack.toggle()
+             // }
+            }
+        }
+      }
+      if self.showCalendar {
+        //Spacer()
+        GeometryReader { _ in
+         Filter()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+//        .padding(.leading, 64)
+         .padding(.top, 160)
+        .background {
+          Color.black.opacity(0.6)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.showCalendar.toggle()
+             // }
+            }
+        }
+      }
+    }.background(.white)
   }
 }
 
@@ -97,8 +132,6 @@ struct Pending_Previews: PreviewProvider {
 
 struct PendingPopUp: View {
   var body: some View {
-    ZStack(alignment: .topLeading){
-      Pending()
       VStack(alignment: .leading, spacing: 17){
         HStack(spacing: 13){
           Image("Image 34")
@@ -124,16 +157,12 @@ struct PendingPopUp: View {
         .background(.color("FFFFFF"))
         .cornerRadius(14)
         .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-        .padding(.leading, 60)
-        .padding(.top, 283)
-    }
+//        .padding(.leading, 60)
+//        .padding(.top, 283)
+    
   }
 }
-struct PendingPopUp_Previews: PreviewProvider {
-  static var previews: some View {
-    PendingPopUp()
-  }
-}
+
 
 struct CardPending: View {
   var name: String
@@ -196,83 +225,119 @@ struct CardPending: View {
   }
 }
 struct Canceled: View {
+  @State var show = false
+  @State var returnBack = false
+  @State var showCalendar = false
   var body: some View {
-    ScrollView{
-      VStack(alignment: .leading, spacing: 0){
-        HStack{
-          Image("Image 26")
-            .padding(.horizontal, 20.5)
-            .padding(.top, 18)
-            .padding(.bottom, 16)
-              .background(.white)
-              .cornerRadius(14)
-              .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-          Spacer()
-          Text("Canceled")
-            .font(.system(size: 18, weight: .medium, design: .rounded))
-            .padding(.trailing, 48)
-          Spacer()
+    ZStack{
+      ScrollView{
+        VStack(alignment: .leading, spacing: 0){
+          UpView(title: "Canceled", returnBackProfile: $returnBack, showCalendar: $showCalendar)
+          HStack(spacing: 17){
+            Image("Image 31")
+            Text("May 2021")
+              .font(.system(size: 20, weight: .medium, design: .rounded))
+          }.padding(.bottom, 25)
+          Text("14 May 2021")
+            .font(.system(size: 14, weight: .medium, design: .rounded))
+            .foregroundColor(.color("525F77"))
+            .padding(.bottom, 22)
+            .padding(.leading, -8)
+          ScrollView(.horizontal){
+            HStack{
+              Button(action: {
+                withAnimation{
+                  show.toggle()
+                }
+              }, label: {
+                CardPending(name: "Cleaning Clothes", color: .color("E88B8C"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("FFF2F2"))
+              })
+              CardPending(name: "Cleaning Clothes", color: .color("E88B8C"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("FFF2F2"))
+            }
+          }.padding(.trailing, -24)
+            .padding(.bottom, 25)
+          Text("15 May 2021")
+            .font(.system(size: 14, weight: .medium, design: .rounded))
+            .foregroundColor(.color("525F77"))
+            .padding(.bottom, 22)
+            .padding(.leading, -8)
+          
+          ScrollView(.horizontal){
+            HStack{
+              CardPending(name: "Cleaning Clothes", color: .color("E88B8C"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("FFF2F2"))
+              CardPending(name: "Cleaning Clothes", color: .color("E88B8C"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("FFF2F2"))
+            }
+          }.padding(.trailing, -24)
+            .padding(.bottom, 25)
+
+          Text("16 May 2021")
+            .padding(.bottom, 22)
+            .font(.system(size: 14, weight: .medium, design: .rounded))
+            .foregroundColor(.color("525F77"))
+            .padding(.leading, -8)
+          ScrollView(.horizontal){
+            HStack{
+              CardPending(name: "Cleaning Clothes", color: .color("E88B8C"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("FFF2F2"))
+              CardPending(name: "Cleaning Clothes", color: .color("E88B8C"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("FFF2F2"))
+            }
+          }.padding(.trailing, -24)
+        }.padding(.horizontal,24)
+      }
+      if self.show {
+        //Spacer()
+        GeometryReader { _ in
+          CanceledPopUp()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+        .padding(.leading, 64)
+        .padding(.top, 280)
+        .background {
+          Color.black.opacity(0)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+              withAnimation {
+                self.show.toggle()
+              }
+            }
         }
-        HStack{
-          HStack(spacing: 15){
-                  Image("Search1")
-                  Text("Search for task")
-                    .font(.system(size: 14, weight: .medium, design: .default))
-                    .foregroundColor(.color("C8CDD9"))
-                  Spacer()
-                  Image("Image 29")
-                }.padding(.horizontal, 20)
-                  .padding(.vertical, 15)
-                .background(.color("F6F6F6"), in: Rectangle()).cornerRadius(15)
-          Image("Image 30")
-            .padding(13)
-            .background(.color("F6F6F6"))
-            .cornerRadius(15)
-        }.padding(.top, 31)
-          .padding(.bottom, 23)
-        HStack(spacing: 17){
-          Image("Image 31")
-          Text("May 2021")
-            .font(.system(size: 20, weight: .medium, design: .rounded))
-        }.padding(.bottom, 25)
-        Text("14 May 2021")
-          .font(.system(size: 14, weight: .medium, design: .rounded))
-          .foregroundColor(.color("525F77"))
-          .padding(.bottom, 22)
-          .padding(.leading, -8)
-        ScrollView(.horizontal){
-          HStack{
-            CardPending(name: "Cleaning Clothes", color: .color("E88B8C"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("FFF2F2"))
-            CardPending(name: "Cleaning Clothes", color: .color("E88B8C"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("FFF2F2"))
-          }
-        }.padding(.trailing, -24)
-          .padding(.bottom, 25)
-        Text("15 May 2021")
-          .font(.system(size: 14, weight: .medium, design: .rounded))
-          .foregroundColor(.color("525F77"))
-          .padding(.bottom, 22)
-          .padding(.leading, -8)
-        ScrollView(.horizontal){
-          HStack{
-            CardPending(name: "Cleaning Clothes", color: .color("E88B8C"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("FFF2F2"))
-            CardPending(name: "Cleaning Clothes", color: .color("E88B8C"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("FFF2F2"))
-          }
-        }.padding(.trailing, -24)
-          .padding(.bottom, 25)
-        Text("16 May 2021")
-          .padding(.bottom, 22)
-          .font(.system(size: 14, weight: .medium, design: .rounded))
-          .foregroundColor(.color("525F77"))
-          .padding(.leading, -8)
-        ScrollView(.horizontal){
-          HStack{
-            CardPending(name: "Cleaning Clothes", color: .color("E88B8C"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("FFF2F2"))
-            CardPending(name: "Cleaning Clothes", color: .color("E88B8C"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("FFF2F2"))
-          }
-        }.padding(.trailing, -24)
-      }.padding(.horizontal,24)
-    }
-    
+      }
+      if self.returnBack {
+        //Spacer()
+        GeometryReader { _ in
+         Home()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+//        .padding(.leading, 64)
+//        .padding(.top, 280)
+        .background {
+          Color.black.opacity(0)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.returnBack.toggle()
+             // }
+            }
+        }
+      }
+      if self.showCalendar {
+        //Spacer()
+        GeometryReader { _ in
+         Filter()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+//        .padding(.leading, 64)
+         .padding(.top, 160)
+        .background {
+          Color.black.opacity(0.6)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.showCalendar.toggle()
+             // }
+            }
+        }
+      }
+    }.background(.white)
   }
 }
 struct Canceled_Previews: PreviewProvider {
@@ -283,8 +348,8 @@ struct Canceled_Previews: PreviewProvider {
 
 struct CanceledPopUp: View {
   var body: some View {
-    ZStack(alignment: .topLeading){
-      Canceled()
+   // ZStack(alignment: .topLeading){
+     // Canceled()
       VStack(alignment: .leading, spacing: 17){
         HStack(spacing: 13){
           Image("Image 34")
@@ -310,94 +375,153 @@ struct CanceledPopUp: View {
         .background(.color("FFFFFF"))
         .cornerRadius(14)
         .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-        .padding(.leading, 64)
-        .padding(.top, 283)
-    }
+//        .padding(.leading, 64)
+//        .padding(.top, 283)
+    //}
   }
 }
-struct CanceledPopUp_Previews: PreviewProvider {
-  static var previews: some View {
-    CanceledPopUp()
-  }
-}
+
 struct OnGoing: View {
+  @State var show = false
+  @State var showFilter = false
+  @State var showCalendar = false
+  @State var returnBack = false
+  
   var body: some View {
-    ScrollView{
-      VStack(alignment: .leading, spacing: 0){
-        HStack{
-          Image("Image 26")
-            .padding(.horizontal, 20.5)
-            .padding(.top, 18)
-            .padding(.bottom, 16)
-              .background(.white)
-              .cornerRadius(14)
-              .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-          Spacer()
-          Text("On going")
-            .font(.system(size: 18, weight: .medium, design: .rounded))
-            .padding(.trailing, 48)
-          Spacer()
+    ZStack{
+      ScrollView{
+        VStack(alignment: .leading, spacing: 0){
+          UpView(title: "On Going", returnBackProfile: $returnBack, showCalendar: $showFilter)
+          HStack(spacing: 17){
+            Button(action: {
+              withAnimation{
+                showCalendar.toggle()
+              }
+            }, label: {
+              Image("Image 31")
+            })
+            Text("May 2021")
+              .font(.system(size: 20, weight: .medium, design: .rounded))
+          }.padding(.bottom, 25)
+          Text("14 May 2021")
+            .font(.system(size: 14, weight: .medium, design: .rounded))
+            .foregroundColor(.color("525F77"))
+            .padding(.bottom, 22)
+            .padding(.leading, -8)
+          ScrollView(.horizontal){
+            HStack{
+              Button(action: {
+                withAnimation{
+                  show.toggle()
+                }
+              }, label: {
+                CardPending(name: "Cleaning Clothes", color: .color("67EF8D"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("F2FDF5"))
+              })
+              CardPending(name: "Cleaning Clothes", color: .color("67EF8D"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("F2FDF5"))
+            }
+          }.padding(.trailing, -24)
+            .padding(.bottom, 25)
+          Text("15 May 2021")
+            .font(.system(size: 14, weight: .medium, design: .rounded))
+            .foregroundColor(.color("525F77"))
+            .padding(.bottom, 22)
+            .padding(.leading, -8)
+          ScrollView(.horizontal){
+            HStack{
+              CardPending(name: "Cleaning Clothes", color: .color("67EF8D"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("F2FDF5"))
+              CardPending(name: "Cleaning Clothes", color: .color("67EF8D"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("F2FDF5"))
+            }
+          }.padding(.trailing, -24)
+            .padding(.bottom, 25)
+
+          Text("16 May 2021")
+            .padding(.bottom, 22)
+            .font(.system(size: 14, weight: .medium, design: .rounded))
+            .foregroundColor(.color("525F77"))
+            .padding(.leading, -8)
+          
+          ScrollView(.horizontal){
+            HStack{
+              CardPending(name: "Cleaning Clothes", color: .color("67EF8D"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("F2FDF5"))
+              CardPending(name: "Cleaning Clothes", color: .color("67EF8D"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("F2FDF5"))
+            }
+          }.padding(.trailing, -24)
+        }.padding(.horizontal,24)
+      }
+
+      if self.showCalendar {
+        //Spacer()
+        GeometryReader { _ in
+          Calendar2()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+//        .padding(.leading, 60)
+        .padding(.top, 149)
+        .background {
+          Color.color("1F1F1F").opacity(0.6)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+              
+                self.showCalendar.toggle()
+              
+            }
         }
-        HStack{
-          HStack(spacing: 15){
-                  Image("Search1")
-                  Text("Search for task")
-                    .font(.system(size: 14, weight: .medium, design: .default))
-                    .foregroundColor(.color("C8CDD9"))
-                  Spacer()
-                  Image("Image 29")
-                }.padding(.horizontal, 20)
-                  .padding(.vertical, 15)
-                .background(.color("F6F6F6"), in: Rectangle()).cornerRadius(15)
-          Image("Image 30")
-            .padding(13)
-            .background(.color("F6F6F6"))
-            .cornerRadius(15)
-        }.padding(.top, 31)
-          .padding(.bottom, 23)
-        HStack(spacing: 17){
-          Image("Image 31")
-          Text("May 2021")
-            .font(.system(size: 20, weight: .medium, design: .rounded))
-        }.padding(.bottom, 25)
-        Text("14 May 2021")
-          .font(.system(size: 14, weight: .medium, design: .rounded))
-          .foregroundColor(.color("525F77"))
-          .padding(.bottom, 22)
-          .padding(.leading, -8)
-        ScrollView(.horizontal){
-          HStack{
-            CardPending(name: "Cleaning Clothes", color: .color("67EF8D"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("F2FDF5"))
-            CardPending(name: "Cleaning Clothes", color: .color("67EF8D"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("F2FDF5"))
-          }
-        }.padding(.trailing, -24)
-          .padding(.bottom, 25)
-        Text("15 May 2021")
-          .font(.system(size: 14, weight: .medium, design: .rounded))
-          .foregroundColor(.color("525F77"))
-          .padding(.bottom, 22)
-          .padding(.leading, -8)
-        ScrollView(.horizontal){
-          HStack{
-            CardPending(name: "Cleaning Clothes", color: .color("67EF8D"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("F2FDF5"))
-            CardPending(name: "Cleaning Clothes", color: .color("67EF8D"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("F2FDF5"))
-          }
-        }.padding(.trailing, -24)
-          .padding(.bottom, 25)
-        Text("16 May 2021")
-          .padding(.bottom, 22)
-          .font(.system(size: 14, weight: .medium, design: .rounded))
-          .foregroundColor(.color("525F77"))
-          .padding(.leading, -8)
-        ScrollView(.horizontal){
-          HStack{
-            CardPending(name: "Cleaning Clothes", color: .color("67EF8D"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("F2FDF5"))
-            CardPending(name: "Cleaning Clothes", color: .color("67EF8D"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"), colorBack: .color("F2FDF5"))
-          }
-        }.padding(.trailing, -24)
-      }.padding(.horizontal,24)
-    }
-    
+      }
+      if self.show {
+        //Spacer()
+        GeometryReader { _ in
+          OnGoingPopUp()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+        .padding(.leading, 60)
+        .padding(.top, 280)
+        .background {
+          Color.black.opacity(0)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+              withAnimation {
+                self.show.toggle()
+              }
+            }
+        }
+      }
+      if self.returnBack {
+        //Spacer()
+        GeometryReader { _ in
+         Home()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+//        .padding(.leading, 64)
+//        .padding(.top, 280)
+        .background {
+          Color.black.opacity(0)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.returnBack.toggle()
+             // }
+            }
+        }
+      }
+      if self.showFilter {
+        //Spacer()
+        GeometryReader { _ in
+         Filter()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+//        .padding(.leading, 64)
+         .padding(.top, 160)
+        .background {
+          Color.black.opacity(0.6)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.showFilter.toggle()
+             // }
+            }
+        }
+      }
+    }.background(.white)
   }
 }
 struct OnGoing_Previews: PreviewProvider {
@@ -407,8 +531,7 @@ struct OnGoing_Previews: PreviewProvider {
 }
 struct OnGoingPopUp: View {
   var body: some View {
-    ZStack(alignment: .topLeading){
-      OnGoing()
+    
       VStack(alignment: .leading, spacing: 17){
         HStack(spacing: 13){
           Image("Image 37")
@@ -434,9 +557,9 @@ struct OnGoingPopUp: View {
         .background(.color("FFFFFF"))
         .cornerRadius(14)
         .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-        .padding(.leading, 64)
-        .padding(.top, 283)
-    }
+//        .padding(.leading, 64)
+//        .padding(.top, 283)
+    
   }
 }
 struct OngoingPopUp_Previews: PreviewProvider {

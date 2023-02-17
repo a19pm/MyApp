@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PromoScreen: View {
+  @State var isSelected: Bool = false
   var body: some View {
     ScrollView {
       VStack(alignment: .leading, spacing: 0){
@@ -115,21 +116,9 @@ struct PromoScreen: View {
             Spacer()
           }
           HStack(spacing: 22){
-            Text("Update")
-              .font(.system(size: 12, weight: .regular, design: .default))
-              .foregroundColor(.color("616161"))
-           
-            Text("Message")
-              .font(.system(size: 12, weight: .regular, design: .default))
-              .foregroundColor(.color("616161"))
-            Text("Promo")
-              .font(.system(size: 12, weight: .regular, design: .default))
-              .foregroundColor(.color("FFFFFF"))
-              .padding(10)
-              .padding(.horizontal, 5)
-              .background(.color("3544C4"))
-              .cornerRadius(6)
-              .shadow(color: .color("3544C4").opacity(1), radius: 34, x: 10, y: 32)
+            N(notifivation: "Update", isSelected: $isSelected)
+            N(notifivation: "Message", isSelected: $isSelected)
+            N(notifivation: "Promo", isSelected: $isSelected)
           }.padding(.vertical, 7 ).padding(.leading, 24).padding(.trailing, 7)
             .background(.white, in: RoundedRectangle(cornerRadius: 6))//.cornerRadius(6)
             .shadow(color: .color("35405A").opacity(0.3), radius: 24, x: 0, y: 22)

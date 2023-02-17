@@ -8,13 +8,13 @@
 import SwiftUI
 struct Filter: View {
   var body: some View {
-    ZStack(alignment: .bottom){
-      ZStack{
-           OnGoing2()
-           Rectangle()
-             .foregroundColor(.color("1F1F1F").opacity(0.6))
-             .ignoresSafeArea()
-         }
+//    ZStack(alignment: .bottom){
+//      ZStack{
+//           OnGoing2()
+//           Rectangle()
+//             .foregroundColor(.color("1F1F1F").opacity(0.6))
+//             .ignoresSafeArea()
+//         }
       VStack(alignment: .leading, spacing: 0){
         Text("Sort by tag")
           .font(.system(size: 14.84, weight: .medium, design: .default))
@@ -77,15 +77,8 @@ struct Filter: View {
           .padding(.bottom, 45)
         HStack{
           Spacer()
-          Text("Cancel")
-            .foregroundColor(.color("5B67CA"))
-            .frame(width: 91, height: 34)
-            .overlay(RoundedRectangle(cornerRadius: 6).stroke(.color("5B67CA"), lineWidth: 1.5 ))
-          Text("Filter")
-            .foregroundColor(.white)
-            .frame(width: 91, height: 34)
-            .background(.color("5B67CA"))
-            .cornerRadius(8)
+          CanSav(text: "Cancel")
+          CanSav(text: "Filter")
           Spacer()
         }.font(.system(size: 14, weight: .medium, design: .default))
       }.padding(.horizontal, 20)
@@ -94,8 +87,8 @@ struct Filter: View {
         .background(.white)
         .cornerRadius(18.56)
         .padding(.horizontal, 16)
-        .padding(.bottom, 170)
-    }
+//        .padding(.bottom, 170)
+    //}
    
   }
 }
@@ -109,37 +102,22 @@ struct Filter_Previews: PreviewProvider {
 struct Calendar2: View {
   
   var body: some View {
-    ZStack(alignment: .bottom){
-      ZStack{
-        OnGoing2()
-        Rectangle()
-          .foregroundColor(.color("1F1F1F").opacity(0.6))
-          .ignoresSafeArea()
-      }
+
       VStack(spacing: 0){
         CalendarView()
         HStack(spacing: 20){
-          Text("Cancel")
-            .font(.system(size: 14, weight: .medium, design: .default))
-            .foregroundColor(.color("5B67CA"))
-            .frame(width: 91, height: 35)
-            .overlay(RoundedRectangle(cornerRadius: 8).stroke(.color("5B67CA"), lineWidth: 1.5 ))
-          Text("Save")
-            .font(.system(size: 14, weight: .medium, design: .default))
-            .frame(width: 91, height: 35)
-            .foregroundColor(.white)
-            .background(.color("5B67CA"))
-            .cornerRadius(8)
+          CanSav(text: "Cancel")
+          CanSav(text: "Save")
         }
       }.padding(.top, 10)
         .padding(.bottom, 30)
         .background(.white)
         .cornerRadius(20)
         .padding(.horizontal, 16.5)
-        .padding(.bottom, 165)
+        //.padding(.bottom, 165)
         
         
-    }
+    
   }
 }
     
@@ -153,37 +131,22 @@ struct Calendar2_Previews: PreviewProvider {
 struct Calendar3: View {
   
   var body: some View {
-    ZStack(alignment: .bottom){
-      ZStack{
-        TaskPopUp()
-        Rectangle()
-          .foregroundColor(.color("1F1F1F").opacity(0.6))
-          .ignoresSafeArea()
-      }
+
       VStack(spacing: 0){
         CalendarView()
         HStack(spacing: 20){
-          Text("Cancel")
-            .font(.system(size: 14, weight: .medium, design: .default))
-            .foregroundColor(.color("5B67CA"))
-            .frame(width: 91, height: 35)
-            .overlay(RoundedRectangle(cornerRadius: 8).stroke(.color("5B67CA"), lineWidth: 1.5 ))
-          Text("Save")
-            .font(.system(size: 14, weight: .medium, design: .default))
-            .frame(width: 91, height: 35)
-            .foregroundColor(.white)
-            .background(.color("5B67CA"))
-            .cornerRadius(8)
+          CanSav(text: "Cancel")
+          CanSav(text: "Save")
         }
       }.padding(.top, 10)
         .padding(.bottom, 30)
         .background(.white)
         .cornerRadius(20)
         .padding(.horizontal, 16.5)
-        .padding(.bottom, 165)
+        //.padding(.bottom, 165)
         
         
-    }
+    
   }
 }
     
@@ -195,27 +158,12 @@ struct Calendar3_Previews: PreviewProvider {
 struct Calendar4: View {
   
   var body: some View {
-    ZStack(alignment: .bottom){
-      ZStack{
-        AddTask()
-        Rectangle()
-          .foregroundColor(.color("1F1F1F").opacity(0.6))
-          .ignoresSafeArea()
-      }
+
       VStack(spacing: 0){
         CalendarView()
         HStack(spacing: 20){
-          Text("Cancel")
-            .font(.system(size: 14, weight: .medium, design: .default))
-            .foregroundColor(.color("5B67CA"))
-            .frame(width: 91, height: 35)
-            .overlay(RoundedRectangle(cornerRadius: 8).stroke(.color("5B67CA"), lineWidth: 1.5 ))
-          Text("Save")
-            .font(.system(size: 14, weight: .medium, design: .default))
-            .frame(width: 91, height: 35)
-            .foregroundColor(.white)
-            .background(.color("5B67CA"))
-            .cornerRadius(8)
+          CanSav(text: "Cancel")
+          CanSav(text: "Save")
         }
       }.padding(.top, 10)
         .padding(.bottom, 30)
@@ -227,7 +175,7 @@ struct Calendar4: View {
         
     }
   }
-}
+
     
 struct Calendar4_Previews: PreviewProvider {
   static var previews: some View {
@@ -237,13 +185,13 @@ struct Calendar4_Previews: PreviewProvider {
 struct AddTaskTime: View {
   
   var body: some View {
-    ZStack(alignment: .bottom){
-      ZStack{
-        AddTask()
-        Rectangle()
-          .foregroundColor(.color("1F1F1F").opacity(0.6))
-          .ignoresSafeArea()
-      }
+//    ZStack(alignment: .bottom){
+//      ZStack{
+//        AddTask()
+//        Rectangle()
+//          .foregroundColor(.color("1F1F1F").opacity(0.6))
+//          .ignoresSafeArea()
+//      }
       VStack(spacing: 0){
         Text("Edit time")
           .font(.system(size: 22, weight: .medium, design: .default))
@@ -316,27 +264,18 @@ struct AddTaskTime: View {
           .frame(height: 1)
           .foregroundColor(.color("E8E9F3"))
         HStack(spacing: 20){
-          Text("Cancel")
-            .font(.system(size: 14, weight: .medium, design: .default))
-            .foregroundColor(.color("5B67CA"))
-            .frame(width: 91, height: 35)
-            .overlay(RoundedRectangle(cornerRadius: 8).stroke(.color("5B67CA"), lineWidth: 1.5 ))
-          Text("Save")
-            .font(.system(size: 14, weight: .medium, design: .default))
-            .frame(width: 91, height: 35)
-            .foregroundColor(.white)
-            .background(.color("5B67CA"))
-            .cornerRadius(8)
+          CanSav(text: "Cancel")
+          CanSav(text: "Save")
         }.padding(.top, 40)
       }.padding(.top, 26)
         .padding(.bottom, 30)
         .background(.white)
         .cornerRadius(20)
         .padding(.horizontal, 16.5)
-        .padding(.bottom, 130)
+//        .padding(.bottom, 130)
         
         
-    }
+//    }
   }
 }
     

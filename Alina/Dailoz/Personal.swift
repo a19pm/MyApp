@@ -6,68 +6,177 @@
 //
 
 import SwiftUI
-
-struct Personal: View {
+struct UpView: View {
+  var title: String
+  @Binding var returnBackProfile : Bool
+  @Binding var showCalendar : Bool
   var body: some View {
-    ScrollView{
-      VStack(alignment: .leading, spacing: 0){
-        HStack{
-          Image("Image 26")
-            .padding(.horizontal, 20.5)
-            .padding(.top, 18)
-            .padding(.bottom, 16)
-            .background(.white)
-            .cornerRadius(14)
-            .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-          Spacer()
-          Text("Personal")
-            .font(.system(size: 18, weight: .medium, design: .rounded))
-            .padding(.trailing, 48)
-          Spacer()
-        }
-        HStack{
-          HStack(spacing: 15){
-            Image("Search1")
-            Text("Search for task")
-              .font(.system(size: 14, weight: .medium, design: .default))
-              .foregroundColor(.color("C8CDD9"))
+    ZStack{
+      ScrollView{
+        VStack(alignment: .leading, spacing: 0){
+          HStack{
+            Button{
+              returnBackProfile.toggle()
+            } label: {
+              Image("Image 26")
+                .padding(.horizontal, 20.5)
+                .padding(.top, 18)
+                .padding(.bottom, 16)
+                .background(.white)
+                .cornerRadius(14)
+                .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
+            }
+            
             Spacer()
-            Image("Image 29")
-          }.padding(.horizontal, 20)
-            .padding(.vertical, 15)
-            .background(.color("F6F6F6"), in: Rectangle()).cornerRadius(15)
-          Image("Image 30")
-            .padding(13)
-            .background(.color("F6F6F6"))
-            .cornerRadius(15)
-        }.padding(.top, 31)
-          .padding(.bottom, 23)
-        
-        VStack(spacing: 18){
-          CardPersonal(name: "Cleaning Clothes", color: .color("8F81FE"), colorUrgent: .color("8F81FE"), time: "07:00 - 07:15", colorBackground: .color("ECEAFF"), colorBack: .color("F6F7FF"))
-          CardPersonal(name: "Cleaning Clothes", color: .color("8F81FE"), colorUrgent: .color("8F81FE"), time: "07:15 - 07:35", colorBackground: .color("ECEAFF"), colorBack: .color("F6F7FF"))
-          CardPersonal(name: "Cleaning Clothes", color: .color("8F81FE"), colorUrgent: .color("8F81FE"), time: "07:00 - 07:15", colorBackground: .color("ECEAFF"), colorBack: .color("F6F7FF"))
-          CardPersonal(name: "Cleaning Clothes", color: .color("8F81FE"), colorUrgent: .color("8F81FE"), time: "07:15 - 07:35", colorBackground: .color("ECEAFF"), colorBack: .color("F6F7FF"))
-        }
-        Spacer()
-        HStack{
-          Spacer()
-          ZStack{
-            Circle()
-              .fill(LinearGradient(colors: [.color("5B67CA"), .color("A3A9D9")], startPoint:.topTrailing , endPoint: .bottomLeading))
-              .frame(width: 50)
-              .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-              //.background(in: Circle(), fillStyle: LinearGradient(colors: [.color("5B67CA"), .color("A3A9D9")], startPoint: .bottomLeading, endPoint: .topTrailing))
-            Text("+")
-              .font(.system(size: 24))
-              .foregroundColor(.white)
+            Text(title)
+              .font(.system(size: 18, weight: .medium, design: .rounded))
+              .padding(.trailing, 48)
+            Spacer()
           }
-          
-        }.ignoresSafeArea().padding(.top, 8)
+          HStack{
+            HStack(spacing: 15){
+              Image("Search1")
+              Text("Search for task")
+                .font(.system(size: 14, weight: .medium, design: .default))
+                .foregroundColor(.color("C8CDD9"))
+              Spacer()
+              Image("Image 29")
+            }.padding(.horizontal, 20)
+              .padding(.vertical, 15)
+              .background(.color("F6F6F6"), in: Rectangle()).cornerRadius(15)
+            Button {
+              showCalendar.toggle()
+            } label: {
+              Image("Image 30")
+                .padding(13)
+                .background(.color("F6F6F6"))
+                .cornerRadius(15)
+            }
+          }.padding(.top, 31)
+            .padding(.bottom, 23)
+        }
       }
-      
-      
-    }.padding(.horizontal, 24)
+    }
+  }
+}
+ 
+struct Personal: View {
+  @State var addPersonal = false
+  @State var returnBack = false
+  @State var returnProfile = false
+  @State var showCalendar = false
+  
+  var body: some View {
+    ZStack{
+      ScrollView{
+        VStack(alignment: .leading, spacing: 0){
+    UpView(title: "Personal", returnBackProfile: $returnProfile, showCalendar: $showCalendar)
+          
+          VStack(spacing: 18){
+            CardPersonal(name: "Cleaning Clothes", color: .color("8F81FE"), colorUrgent: .color("8F81FE"), time: "07:00 - 07:15", colorBackground: .color("ECEAFF"), colorBack: .color("F6F7FF"))
+            CardPersonal(name: "Cleaning Clothes", color: .color("8F81FE"), colorUrgent: .color("8F81FE"), time: "07:15 - 07:35", colorBackground: .color("ECEAFF"), colorBack: .color("F6F7FF"))
+            CardPersonal(name: "Cleaning Clothes", color: .color("8F81FE"), colorUrgent: .color("8F81FE"), time: "07:00 - 07:15", colorBackground: .color("ECEAFF"), colorBack: .color("F6F7FF"))
+            CardPersonal(name: "Cleaning Clothes", color: .color("8F81FE"), colorUrgent: .color("8F81FE"), time: "07:15 - 07:35", colorBackground: .color("ECEAFF"), colorBack: .color("F6F7FF"))
+          }
+          Spacer()
+          HStack{
+            Spacer()
+            Button{
+              addPersonal.toggle()
+            } label: {
+              ZStack{
+                Circle()
+                  .fill(LinearGradient(colors: [.color("5B67CA"), .color("A3A9D9")], startPoint:.topTrailing , endPoint: .bottomLeading))
+                  .frame(width: 50)
+                  .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
+                //.background(in: Circle(), fillStyle: LinearGradient(colors: [.color("5B67CA"), .color("A3A9D9")], startPoint: .bottomLeading, endPoint: .topTrailing))
+                Text("+")
+                  .font(.system(size: 24))
+                  .foregroundColor(.white)
+              }
+            }
+            
+            
+          }.ignoresSafeArea().padding(.top, 8)
+        }
+        
+        
+      }.padding(.horizontal, 24)
+        .background(.white)
+      if self.addPersonal {
+        //Spacer()
+        GeometryReader { _ in
+          AddTask(tittle: "Add Personal", hasType: false, returnBack: $returnBack)
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+        //.padding(.leading, 64)
+        //.padding(.top, 126)
+        .background {
+          Color.black.opacity(0.6)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.addPersonal.toggle()
+              //}
+            }
+          
+        }
+      }
+      if self.returnBack {
+        //Spacer()
+        GeometryReader { _ in
+          Personal()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+        //.padding(.leading, 64)
+        //.padding(.top, 126)
+        .background {
+          Color.black.opacity(0.6)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.returnBack.toggle()
+              //}
+            }
+        }
+      }
+      if self.returnProfile {
+        //Spacer()
+        GeometryReader { _ in
+          Profile1()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+        //.padding(.leading, 64)
+        //.padding(.top, 126)
+        .background {
+          Color.black.opacity(0)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.returnProfile.toggle()
+              //}
+            }
+        }
+      }
+      if self.showCalendar {
+        //Spacer()
+        GeometryReader { _ in
+          Filter()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+        //.padding(.leading, 64)
+        .padding(.top, 170)
+        .background {
+          Color.black.opacity(0.6)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.showCalendar.toggle()
+              //}
+            }
+        }
+      }
+    }
   }
 }
 
@@ -137,221 +246,80 @@ struct CardPersonal: View {
   }
 }
 
-
-struct AddPersonal: View {
-  var body: some View {
-    VStack(alignment: .leading, spacing: 0){
-      HStack{
-        Image("Image 26")
-          .padding(.horizontal, 20.5)
-          .padding(.top, 18)
-          .padding(.bottom, 16)
-          .background(.white)
-          .cornerRadius(14)
-          .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-        Spacer()
-        Text("Add Personal")
-          .font(.system(size: 18, weight: .medium, design: .rounded))
-          .padding(.trailing, 48)
-        Spacer()
-      }.padding(.bottom, 31)
-      VStack(alignment: .leading, spacing: 0){
-        VStack(alignment: .leading, spacing: 0){
-          Text("Tittle")
-            .font(.system(size: 14, weight: .medium, design: .rounded))
-            .foregroundColor(.color("8A8BB3"))
-          Text("Plan for a month")
-            .font(.system(size: 16, weight: .medium, design: .rounded))
-            .foregroundColor(.color("10275A"))
-            .padding(.top, 16)
-            .padding(.bottom, 18)
-          Rectangle().frame(width: .infinity, height: 1).foregroundColor(.color("E8E9F3"))
-        }
-        VStack(alignment: .leading, spacing: 0){
-          Text("Date")
-            .font(.system(size: 14, weight: .medium, design: .rounded))
-            .foregroundColor(.color("8A8BB3"))
-            .padding(.top, 21)
-          HStack{
-            Text("4 August 2021")
-              .font(.system(size: 16, weight: .medium, design: .rounded))
-              .foregroundColor(.color("10275A"))
-              .padding(.top, 16)
-              .padding(.bottom, 18)
-            Spacer()
-            Image("Image 39")
-          }
-          Rectangle().frame(width: .infinity, height: 1).foregroundColor(.color("E8E9F3"))
-        }
-        VStack(alignment: .leading, spacing: 0){
-          Text("Time")
-            .font(.system(size: 14, weight: .medium, design: .rounded))
-            .foregroundColor(.color("8A8BB3"))
-            .padding(.top, 25)
-          HStack(spacing: 15.94){
-            VStack(spacing: 0){
-              Text("07:00 AM")
-                .font(.system(size: 16, weight: .medium, design: .rounded))
-                .foregroundColor(.color("10275A"))
-                .padding(.bottom, 18)
-              Rectangle().frame(width: .infinity, height: 1).foregroundColor(.color("E8E9F3"))
-            }
-            VStack(spacing: 0){
-              Text("07:30 AM")
-                .font(.system(size: 16, weight: .medium, design: .rounded))
-                .foregroundColor(.color("10275A"))
-                .padding(.bottom, 18)
-              Rectangle().frame(width: .infinity, height: 1).foregroundColor(.color("E8E9F3"))
-            }
-            
-          }.padding(.top, 16)
-           
-          
-        }
-        VStack(alignment: .leading, spacing: 0){
-          Text("Description")
-            .font(.system(size: 14, weight: .medium, design: .rounded))
-            .foregroundColor(.color("8A8BB3"))
-            .padding(.top, 25)
-          HStack{
-            Text("Creating this month's work plan")
-              .font(.system(size: 16, weight: .medium, design: .rounded))
-              .foregroundColor(.color("10275A"))
-              .padding(.top, 16)
-              .padding(.bottom, 18)
-            Spacer()
-            VStack(spacing: 1.92){
-              Rectangle().frame(width: 1.75, height: 1.75)
-              Rectangle().frame(width: 1.75, height: 1.75)
-              Rectangle().frame(width: 1.75, height: 1.75)
-            }.foregroundColor(.color("A8AEDF"))
-          }
-          Rectangle().frame(width: .infinity, height: 1).foregroundColor(.color("E8E9F3"))
-        }
-      
-        VStack(alignment: .leading, spacing: 0){
-          Text("Tags")
-            .font(.system(size: 14, weight: .medium, design: .rounded))
-            .foregroundColor(.color("8A8BB3"))
-          HStack(spacing: 6){
-            Text("Office")
-              .foregroundColor(.color("8F81FE"))
-              .frame(width: 77, height: 34)
-              .background(.color("ECEAFF"))
-              .cornerRadius(20)
-            Text("Home")
-              .foregroundColor(.color("F0A58E"))
-              .frame(width: 77, height: 34)
-              .background(.color("FFEFEB"))
-              .cornerRadius(20)
-            Text("Urgent")
-              .foregroundColor(.color("F57C96"))
-              .frame(width: 82, height: 34)
-              .background(.color("FFE9ED"))
-              .cornerRadius(20)
-            Text("Work")
-              .foregroundColor(.color("1EC1C3"))
-              .frame(width: 73, height: 34)
-              .background(.color("D1FEFF"))
-              .cornerRadius(20)
-          }.font(.system(size: 14, weight: .medium, design: .default))
-            .padding(.top, 22)
-                      .padding(.bottom, 16)
-        }.padding(.top, 25)
-        HStack{
-          Spacer()
-          Text("+ Add new tag")
-            .font(.system(size: 12, weight: .medium, design: .rounded))
-            .foregroundColor(.color("12175D"))
-            .multilineTextAlignment(.center)
-          Spacer()
-        }
-        Spacer()
-        Text("Create")
-          .font(.system(size: 18, weight: .medium, design: .rounded))
-          .foregroundColor(.white)
-          .padding(.vertical,15)
-          .padding(.bottom, 5)
-          .frame(maxWidth: .infinity)
-          .background(.color("5B67CA"))
-          .cornerRadius(14)
-          .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-        
-        
-      }
-    }.padding(.horizontal, 24)
-    
-  }
-}
-
-struct AddPersonal_Previews: PreviewProvider {
-  static var previews: some View {
-    AddPersonal()
-  }
-}
 struct Work: View {
+  @State var returnProfile = false
+  @State var showFilter = false
   var body: some View {
-    ScrollView{
-      VStack(alignment: .leading, spacing: 0){
-        HStack{
-          Image("Image 26")
-            .padding(.horizontal, 20.5)
-            .padding(.top, 18)
-            .padding(.bottom, 16)
-            .background(.white)
-            .cornerRadius(14)
-            .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-          Spacer()
-          Text("Work")
-            .font(.system(size: 18, weight: .medium, design: .rounded))
-            .padding(.trailing, 48)
-          Spacer()
-        }
-        HStack{
-          HStack(spacing: 15){
-            Image("Search1")
-            Text("Search for task")
-              .font(.system(size: 14, weight: .medium, design: .default))
-              .foregroundColor(.color("C8CDD9"))
-            Spacer()
-            Image("Image 29")
-          }.padding(.horizontal, 20)
-            .padding(.vertical, 15)
-            .background(.color("F6F6F6"), in: Rectangle()).cornerRadius(15)
-          Image("Image 30")
-            .padding(13)
-            .background(.color("F6F6F6"))
-            .cornerRadius(15)
-        }.padding(.top, 31)
-          .padding(.bottom, 23)
-        
-        VStack(spacing: 18){
-          CardPersonal(name: "Web UI Design", color: .color("37C5FF"), colorUrgent: .color("37C5FF"), time: "07:00 - 07:15", colorBackground: .color("D8F4FF"), colorBack: .color("F5FCFF"))
-          CardPersonal(name: "Web UI Design", color: .color("37C5FF"), colorUrgent: .color("37C5FF"), time: "07:15 - 07:30", colorBackground: .color("D8F4FF"), colorBack: .color("F5FCFF"))
-          CardPersonal(name: "Web UI Design", color: .color("37C5FF"), colorUrgent: .color("37C5FF"), time: "07:00 - 07:15", colorBackground: .color("D8F4FF"), colorBack: .color("F5FCFF"))
-          CardPersonal(name: "Web UI Design", color: .color("37C5FF"), colorUrgent: .color("37C5FF"), time: "07:15 - 07:30", colorBackground: .color("D8F4FF"), colorBack: .color("F5FCFF"))
+    ZStack{
+      ScrollView{
+        VStack(alignment: .leading, spacing: 0){
+          UpView(title: "Work", returnBackProfile: $returnProfile, showCalendar: $showFilter)
           
-        }
-        Spacer()
-        HStack{
+          VStack(spacing: 18){
+            CardPersonal(name: "Web UI Design", color: .color("37C5FF"), colorUrgent: .color("37C5FF"), time: "07:00 - 07:15", colorBackground: .color("D8F4FF"), colorBack: .color("F5FCFF"))
+            CardPersonal(name: "Web UI Design", color: .color("37C5FF"), colorUrgent: .color("37C5FF"), time: "07:15 - 07:30", colorBackground: .color("D8F4FF"), colorBack: .color("F5FCFF"))
+            CardPersonal(name: "Web UI Design", color: .color("37C5FF"), colorUrgent: .color("37C5FF"), time: "07:00 - 07:15", colorBackground: .color("D8F4FF"), colorBack: .color("F5FCFF"))
+            CardPersonal(name: "Web UI Design", color: .color("37C5FF"), colorUrgent: .color("37C5FF"), time: "07:15 - 07:30", colorBackground: .color("D8F4FF"), colorBack: .color("F5FCFF"))
+            
+          }
           Spacer()
-          ZStack{
-            Circle()
-              .fill(LinearGradient(colors: [.color("5B67CA"), .color("A3A9D9")], startPoint:.topTrailing , endPoint: .bottomLeading))
-              .frame(width: 50)
-              .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
+          HStack{
+            Spacer()
+            ZStack{
+              Circle()
+                .fill(LinearGradient(colors: [.color("5B67CA"), .color("A3A9D9")], startPoint:.topTrailing , endPoint: .bottomLeading))
+                .frame(width: 50)
+                .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
               
               //.background(in: Circle(), fillStyle: LinearGradient(colors: [.color("5B67CA"), .color("A3A9D9")], startPoint: .bottomLeading, endPoint: .topTrailing))
-            Text("+")
-              .font(.system(size: 24))
-              .foregroundColor(.white)
-          }
-          
-        }.ignoresSafeArea().padding(.top, 8)
+              Text("+")
+                .font(.system(size: 24))
+                .foregroundColor(.white)
+            }
+            
+          }.ignoresSafeArea().padding(.top, 8)
+        }
+        
+        
+      }.padding(.horizontal, 24)
+        .background(.white)
+      if self.returnProfile {
+        //Spacer()
+        GeometryReader { _ in
+          Profile1()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+        //.padding(.leading, 64)
+        //.padding(.top, 126)
+        .background {
+          Color.black.opacity(0)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.returnProfile.toggle()
+              //}
+            }
+        }
       }
-      
-      
-    }.padding(.horizontal, 24)
+      if self.showFilter {
+        //Spacer()
+        GeometryReader { _ in
+          Filter()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+        //.padding(.leading, 64)
+        .padding(.top, 170)
+        .background {
+          Color.black.opacity(0.6)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.showFilter.toggle()
+              //}
+            }
+        }
+      }
+    }
   }
 }
 
@@ -362,68 +330,120 @@ struct Work_Previews: PreviewProvider {
 }
 
 struct Private: View {
+  @State var addPrivate = false
+  @State var returnBack = false
+  @State var returnProfile = false
+  @State var showFilter = false
   var body: some View {
-    ScrollView{
-      VStack(alignment: .leading, spacing: 0){
-        HStack{
-          Image("Image 26")
-            .padding(.horizontal, 20.5)
-            .padding(.top, 18)
-            .padding(.bottom, 16)
-            .background(.white)
-            .cornerRadius(14)
-            .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-          Spacer()
-          Text("Private")
-            .font(.system(size: 18, weight: .medium, design: .rounded))
-            .padding(.trailing, 48)
-          Spacer()
-        }
-        HStack{
-          HStack(spacing: 15){
-            Image("Search1")
-            Text("Search for task")
-              .font(.system(size: 14, weight: .medium, design: .default))
-              .foregroundColor(.color("C8CDD9"))
-            Spacer()
-            Image("Image 29")
-          }.padding(.horizontal, 20)
-            .padding(.vertical, 15)
-            .background(.color("F6F6F6"), in: Rectangle()).cornerRadius(15)
-          Image("Image 30")
-            .padding(13)
-            .background(.color("F6F6F6"))
-            .cornerRadius(15)
-        }.padding(.top, 31)
-          .padding(.bottom, 23)
-        
-        VStack(spacing: 18){
-          CardPersonal(name: "Web UI Design", color: .color("F0A58E"), colorUrgent: .color("F0A58E"), time: "07:00 - 07:15", colorBackground: .color("FFEAE3"), colorBack: .color("FDF5F5"))
-          CardPersonal(name: "Web UI Design", color: .color("F0A58E"), colorUrgent: .color("F0A58E"), time: "07:15 - 07:30", colorBackground: .color("FFEAE3"), colorBack: .color("FDF5F5"))
-          CardPersonal(name: "Web UI Design", color: .color("F0A58E"), colorUrgent: .color("F0A58E"), time: "07:00 - 07:15", colorBackground: .color("FFEAE3"), colorBack: .color("FDF5F5"))
-          CardPersonal(name: "Web UI Design", color: .color("F0A58E"), colorUrgent: .color("F0A58E"), time: "07:15 - 07:30", colorBackground: .color("FFEAE3"), colorBack: .color("FDF5F5"))
+    ZStack{
+      ScrollView{
+        VStack(alignment: .leading, spacing: 0){
+          UpView(title: "Private", returnBackProfile: $returnBack, showCalendar: $showFilter)
           
-        }
-        Spacer()
-        HStack{
-          Spacer()
-          ZStack{
-            Circle()
-              .fill(LinearGradient(colors: [.color("5B67CA"), .color("A3A9D9")], startPoint:.topTrailing , endPoint: .bottomLeading))
-              .frame(width: 50)
-              .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-              
-              //.background(in: Circle(), fillStyle: LinearGradient(colors: [.color("5B67CA"), .color("A3A9D9")], startPoint: .bottomLeading, endPoint: .topTrailing))
-            Text("+")
-              .font(.system(size: 24))
-              .foregroundColor(.white)
+          VStack(spacing: 18){
+            CardPersonal(name: "Web UI Design", color: .color("F0A58E"), colorUrgent: .color("F0A58E"), time: "07:00 - 07:15", colorBackground: .color("FFEAE3"), colorBack: .color("FDF5F5"))
+            CardPersonal(name: "Web UI Design", color: .color("F0A58E"), colorUrgent: .color("F0A58E"), time: "07:15 - 07:30", colorBackground: .color("FFEAE3"), colorBack: .color("FDF5F5"))
+            CardPersonal(name: "Web UI Design", color: .color("F0A58E"), colorUrgent: .color("F0A58E"), time: "07:00 - 07:15", colorBackground: .color("FFEAE3"), colorBack: .color("FDF5F5"))
+            CardPersonal(name: "Web UI Design", color: .color("F0A58E"), colorUrgent: .color("F0A58E"), time: "07:15 - 07:30", colorBackground: .color("FFEAE3"), colorBack: .color("FDF5F5"))
+            
           }
-          
-        }.ignoresSafeArea().padding(.top, 8)
+          Spacer()
+          HStack{
+            Spacer()
+            Button{
+              addPrivate.toggle()
+            } label: {
+              ZStack{
+                Circle()
+                  .fill(LinearGradient(colors: [.color("5B67CA"), .color("A3A9D9")], startPoint:.topTrailing , endPoint: .bottomLeading))
+                  .frame(width: 50)
+                  .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
+                
+                //.background(in: Circle(), fillStyle: LinearGradient(colors: [.color("5B67CA"), .color("A3A9D9")], startPoint: .bottomLeading, endPoint: .topTrailing))
+                Text("+")
+                  .font(.system(size: 24))
+                  .foregroundColor(.white)
+              }
+            }
+          }.ignoresSafeArea().padding(.top, 8)
+        }
+        
+        
+      }.padding(.horizontal, 24)
+        .background(.white)
+      if self.addPrivate {
+        //Spacer()
+        GeometryReader { _ in
+          AddTask(tittle: "Add Private", hasType: false, returnBack: $returnBack)
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+        //.padding(.leading, 64)
+        //.padding(.top, 126)
+        .background {
+          Color.black.opacity(0.6)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.addPrivate.toggle()
+              //}
+            }
+        }
       }
-      
-      
-    }.padding(.horizontal, 24)
+      if self.returnBack {
+        //Spacer()
+        GeometryReader { _ in
+          Private()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+        //.padding(.leading, 64)
+        //.padding(.top, 126)
+        .background {
+          Color.black.opacity(0.6)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.returnBack.toggle()
+              //}
+            }
+        }
+      }
+      if self.returnProfile {
+        //Spacer()
+        GeometryReader { _ in
+          Profile1()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+        //.padding(.leading, 64)
+        //.padding(.top, 126)
+        .background {
+          Color.black.opacity(0)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.returnProfile.toggle()
+              //}
+            }
+        }
+      }
+      if self.showFilter {
+        //Spacer()
+        GeometryReader { _ in
+          Filter()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+        //.padding(.leading, 64)
+        .padding(.top, 170)
+        .background {
+          Color.black.opacity(0.6)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.showFilter.toggle()
+              //}
+            }
+        }
+      }
+    }
   }
 }
 
@@ -433,287 +453,21 @@ struct Private_Previews: PreviewProvider {
   }
 }
 
-struct AddPrivate: View {
-  var body: some View {
-    VStack(alignment: .leading, spacing: 0){
-      HStack{
-        Image("Image 26")
-          .padding(.horizontal, 20.5)
-          .padding(.top, 18)
-          .padding(.bottom, 16)
-          .background(.white)
-          .cornerRadius(14)
-          .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-        Spacer()
-        Text("Add private")
-          .font(.system(size: 18, weight: .medium, design: .rounded))
-          .padding(.trailing, 48)
-        Spacer()
-      }.padding(.bottom, 31)
-      VStack(alignment: .leading, spacing: 0){
-        VStack(alignment: .leading, spacing: 0){
-          Text("Tittle")
-            .font(.system(size: 14, weight: .medium, design: .rounded))
-            .foregroundColor(.color("8A8BB3"))
-          Text("Plan for a month")
-            .font(.system(size: 16, weight: .medium, design: .rounded))
-            .foregroundColor(.color("10275A"))
-            .padding(.top, 16)
-            .padding(.bottom, 18)
-          Rectangle().frame(width: .infinity, height: 1).foregroundColor(.color("E8E9F3"))
-        }
-        VStack(alignment: .leading, spacing: 0){
-          Text("Date")
-            .font(.system(size: 14, weight: .medium, design: .rounded))
-            .foregroundColor(.color("8A8BB3"))
-            .padding(.top, 21)
-          HStack{
-            Text("4 August 2021")
-              .font(.system(size: 16, weight: .medium, design: .rounded))
-              .foregroundColor(.color("10275A"))
-              .padding(.top, 16)
-              .padding(.bottom, 18)
-            Spacer()
-            Image("Image 39")
-          }
-          Rectangle().frame(width: .infinity, height: 1).foregroundColor(.color("E8E9F3"))
-        }
-        VStack(alignment: .leading, spacing: 0){
-          Text("Time")
-            .font(.system(size: 14, weight: .medium, design: .rounded))
-            .foregroundColor(.color("8A8BB3"))
-            .padding(.top, 25)
-          HStack(spacing: 15.94){
-            VStack(spacing: 0){
-              Text("07:00 AM")
-                .font(.system(size: 16, weight: .medium, design: .rounded))
-                .foregroundColor(.color("10275A"))
-                .padding(.bottom, 18)
-              Rectangle().frame(width: .infinity, height: 1).foregroundColor(.color("E8E9F3"))
-            }
-            VStack(spacing: 0){
-              Text("07:30 AM")
-                .font(.system(size: 16, weight: .medium, design: .rounded))
-                .foregroundColor(.color("10275A"))
-                .padding(.bottom, 18)
-              Rectangle().frame(width: .infinity, height: 1).foregroundColor(.color("E8E9F3"))
-            }
-            
-          }.padding(.top, 16)
-           
-          
-        }
-        VStack(alignment: .leading, spacing: 0){
-          Text("Description")
-            .font(.system(size: 14, weight: .medium, design: .rounded))
-            .foregroundColor(.color("8A8BB3"))
-            .padding(.top, 25)
-          HStack{
-            Text("Creating this month's work plan")
-              .font(.system(size: 16, weight: .medium, design: .rounded))
-              .foregroundColor(.color("10275A"))
-              .padding(.top, 16)
-              .padding(.bottom, 18)
-            Spacer()
-            VStack(spacing: 1.92){
-              Rectangle().frame(width: 1.75, height: 1.75)
-              Rectangle().frame(width: 1.75, height: 1.75)
-              Rectangle().frame(width: 1.75, height: 1.75)
-            }.foregroundColor(.color("A8AEDF"))
-          }
-          Rectangle().frame(width: .infinity, height: 1).foregroundColor(.color("E8E9F3"))
-        }
-      
-        VStack(alignment: .leading, spacing: 0){
-          Text("Tags")
-            .font(.system(size: 14, weight: .medium, design: .rounded))
-            .foregroundColor(.color("8A8BB3"))
-          HStack(spacing: 6){
-            Text("Office")
-              .foregroundColor(.color("8F81FE"))
-              .frame(width: 77, height: 34)
-              .background(.color("ECEAFF"))
-              .cornerRadius(20)
-            Text("Home")
-              .foregroundColor(.color("F0A58E"))
-              .frame(width: 77, height: 34)
-              .background(.color("FFEFEB"))
-              .cornerRadius(20)
-            Text("Urgent")
-              .foregroundColor(.color("F57C96"))
-              .frame(width: 82, height: 34)
-              .background(.color("FFE9ED"))
-              .cornerRadius(20)
-            Text("Work")
-              .foregroundColor(.color("1EC1C3"))
-              .frame(width: 73, height: 34)
-              .background(.color("D1FEFF"))
-              .cornerRadius(20)
-          }.font(.system(size: 14, weight: .medium, design: .default))
-            .padding(.top, 22)
-                      .padding(.bottom, 16)
-        }.padding(.top, 25)
-        HStack{
-          Spacer()
-          Text("+ Add new tag")
-            .font(.system(size: 12, weight: .medium, design: .rounded))
-            .foregroundColor(.color("12175D"))
-            .multilineTextAlignment(.center)
-          Spacer()
-        }
-        Spacer()
-        Text("Create")
-          .font(.system(size: 18, weight: .medium, design: .rounded))
-          .foregroundColor(.white)
-          .padding(.vertical,15)
-          .padding(.bottom, 5)
-          .frame(maxWidth: .infinity)
-          .background(.color("5B67CA"))
-          .cornerRadius(14)
-          .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-        
-        
-      }
-    }.padding(.horizontal, 24)
-    
-  }
-}
-
-struct AddPrivate_Previews: PreviewProvider {
-  static var previews: some View {
-    AddPrivate()
-  }
-}
 struct Meeting: View {
-  var body: some View {
-    ScrollView{
-      VStack(alignment: .leading, spacing: 0){
-        HStack{
-          Image("Image 26")
-            .padding(.horizontal, 20.5)
-            .padding(.top, 18)
-            .padding(.bottom, 16)
-            .background(.white)
-            .cornerRadius(14)
-            .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-          Spacer()
-          Text("Meeting")
-            .font(.system(size: 18, weight: .medium, design: .rounded))
-            .padding(.trailing, 48)
-          Spacer()
-        }
-        HStack{
-          HStack(spacing: 15){
-            Image("Search1")
-            Text("Search for task")
-              .font(.system(size: 14, weight: .medium, design: .default))
-              .foregroundColor(.color("C8CDD9"))
-            Spacer()
-            Image("Image 29")
-          }.padding(.horizontal, 20)
-            .padding(.vertical, 15)
-            .background(.color("F6F6F6"), in: Rectangle()).cornerRadius(15)
-          Image("Image 30")
-            .padding(13)
-            .background(.color("F6F6F6"))
-            .cornerRadius(15)
-        }.padding(.top, 31)
-          .padding(.bottom, 23)
-        
-        VStack(spacing: 18){
-          CardPersonal(name: "Meeting", color: .color("39C8CB"), colorUrgent: .color("39C8CB"), time: "07:00 - 07:15", colorBackground: .color("DCF7F3"), colorBack: .color("F8FFFA"))
-          CardPersonal(name: "Meeting", color: .color("39C8CB"), colorUrgent: .color("39C8CB"), time: "07:00 - 07:15", colorBackground: .color("DCF7F3"), colorBack: .color("F8FFFA"))
-          CardPersonal(name: "Meeting", color: .color("39C8CB"), colorUrgent: .color("39C8CB"), time: "07:00 - 07:15", colorBackground: .color("DCF7F3"), colorBack: .color("F8FFFA"))
-          CardPersonal(name: "Meeting", color: .color("39C8CB"), colorUrgent: .color("39C8CB"), time: "07:00 - 07:15", colorBackground: .color("DCF7F3"), colorBack: .color("F8FFFA"))
-          
-        }
-        Spacer()
-        HStack{
-          Spacer()
-          ZStack{
-            Circle()
-              .fill(LinearGradient(colors: [.color("5B67CA"), .color("A3A9D9")], startPoint:.topTrailing , endPoint: .bottomLeading))
-              .frame(width: 50)
-              .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-              
-              //.background(in: Circle(), fillStyle: LinearGradient(colors: [.color("5B67CA"), .color("A3A9D9")], startPoint: .bottomLeading, endPoint: .topTrailing))
-            Text("+")
-              .font(.system(size: 24))
-              .foregroundColor(.white)
-          }
-          
-        }.ignoresSafeArea().padding(.top, 8)
-      }
-      
-      
-    }.padding(.horizontal, 24)
-  }
-}
-
-struct Meeting_Previews: PreviewProvider {
-  static var previews: some View {
-    Meeting()
-  }
-}
-struct Event: View {
+  @State var returnProfile = false
+  @State var showFilter = false
   var body: some View {
     ZStack{
       ScrollView{
-        VStack(spacing: 0){
-          HStack{
-            Image("Image 26")
-              .padding(.horizontal, 20.5)
-              .padding(.top, 18)
-              .padding(.bottom, 16)
-              .background(.white)
-              .cornerRadius(14)
-              .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-            Spacer()
-            Text("Events")
-              .font(.system(size: 18, weight: .medium, design: .rounded))
-              .padding(.trailing, 48)
-            Spacer()
-          }
-          HStack{
-            Text("Task")
-              .font(.system(size: 24, weight: .medium, design: .default))
-              .foregroundColor(.color("10275A"))
-            Spacer()
-            HStack(spacing: 6){
-              Image("Calendar")
-                .padding(.top, 2)
-              Text("August 2021").font(.system(size: 12, weight: .medium, design: .default))
-                            .foregroundColor(.color("525F77"))
-            }
-            
-          }.padding(.top, 32)
-            .padding(.bottom, 15)
-          HStack(spacing: 28){
-            Day(day: "MO", date: "12", isSelected: false)
-            
-            Day(day: "TU", date: "13", isSelected: false)
-            
-            Day(day: "WE", date: "14", isSelected: true).padding(.horizontal, -13)
-            
-            Day(day: "TH", date: "15", isSelected: false)
-            
-            Day(day: "FR", date: "16", isSelected: false)
-           
-            Day(day: "SA", date: "17", isSelected: false)
-            
-            Day(day: "SU", date: "18", isSelected: false)
-          }
-          HStack{
-            Text("Events")
-              .font(.system(size: 20, weight: .medium, design: .default))
-              .foregroundColor(.color("10275A"))
-            Spacer()
-          }.padding(.top, 24)
-            .padding(.bottom, 20)
+        VStack(alignment: .leading, spacing: 0){
+        UpView(title: "Meeting", returnBackProfile: $returnProfile, showCalendar: $showFilter)
+          
           VStack(spacing: 18){
-            CardPersonal(name: "Design Seminar", color: .color("8F81FE"), colorUrgent: .color("8F81FE"), time: "07:15 - 07:35", colorBackground: .color("ECEAFF"), colorBack: .color("F6F7FF"))
-            CardPersonal(name: "Design Seminar", color: .color("8F81FE"), colorUrgent: .color("8F81FE"), time: "07:00 - 07:15", colorBackground: .color("ECEAFF"), colorBack: .color("F6F7FF"))
-            CardPersonal(name: "Design Seminar", color: .color("8F81FE"), colorUrgent: .color("8F81FE"), time: "07:15 - 07:35", colorBackground: .color("ECEAFF"), colorBack: .color("F6F7FF"))
+            CardPersonal(name: "Meeting", color: .color("39C8CB"), colorUrgent: .color("39C8CB"), time: "07:00 - 07:15", colorBackground: .color("DCF7F3"), colorBack: .color("F8FFFA"))
+            CardPersonal(name: "Meeting", color: .color("39C8CB"), colorUrgent: .color("39C8CB"), time: "07:00 - 07:15", colorBackground: .color("DCF7F3"), colorBack: .color("F8FFFA"))
+            CardPersonal(name: "Meeting", color: .color("39C8CB"), colorUrgent: .color("39C8CB"), time: "07:00 - 07:15", colorBackground: .color("DCF7F3"), colorBack: .color("F8FFFA"))
+            CardPersonal(name: "Meeting", color: .color("39C8CB"), colorUrgent: .color("39C8CB"), time: "07:00 - 07:15", colorBackground: .color("DCF7F3"), colorBack: .color("F8FFFA"))
+            
           }
           Spacer()
           HStack{
@@ -723,23 +477,220 @@ struct Event: View {
                 .fill(LinearGradient(colors: [.color("5B67CA"), .color("A3A9D9")], startPoint:.topTrailing , endPoint: .bottomLeading))
                 .frame(width: 50)
                 .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-                
-                //.background(in: Circle(), fillStyle: LinearGradient(colors: [.color("5B67CA"), .color("A3A9D9")], startPoint: .bottomLeading, endPoint: .topTrailing))
+              
+              //.background(in: Circle(), fillStyle: LinearGradient(colors: [.color("5B67CA"), .color("A3A9D9")], startPoint: .bottomLeading, endPoint: .topTrailing))
               Text("+")
                 .font(.system(size: 24))
                 .foregroundColor(.white)
             }
             
-          }.ignoresSafeArea().padding(.top, 41)
+          }.ignoresSafeArea().padding(.top, 8)
         }
         
         
       }.padding(.horizontal, 24)
-        //.background(.white).safeAreaInset(edge: .bottom) {
-          //TabDailoz(isSelectedHome: false, isSelectedTask: true, isSelectedGraphic: false, isSelectedProfile: false)}
+        .background(.white)
+      if self.returnProfile {
+        //Spacer()
+        GeometryReader { _ in
+          Profile1()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+        //.padding(.leading, 64)
+        //.padding(.top, 126)
+        .background {
+          Color.black.opacity(0)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.returnProfile.toggle()
+              //}
+            }
+        }
       }
-      
+      if self.showFilter {
+        //Spacer()
+        GeometryReader { _ in
+          Filter()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+        //.padding(.leading, 64)
+        .padding(.top, 170)
+        .background {
+          Color.black.opacity(0.6)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.showFilter.toggle()
+              //}
+            }
+        }
+      }
+    }
+  }
+}
 
+struct Meeting_Previews: PreviewProvider {
+  static var previews: some View {
+    Meeting()
+  }
+}
+struct Event: View {
+  @State var addEvent = false
+  @State var returnBack = false
+  @State var returnProfile = false
+  var body: some View {
+    ZStack{
+      ZStack{
+        ScrollView{
+          VStack(spacing: 0){
+            HStack{
+              Button{
+                returnProfile.toggle()
+              } label: {
+                Image("Image 26")
+                               .padding(.horizontal, 20.5)
+                               .padding(.top, 18)
+                               .padding(.bottom, 16)
+                               .background(.white)
+                               .cornerRadius(14)
+                               .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
+              }
+             
+              Spacer()
+              Text("Events")
+                .font(.system(size: 18, weight: .medium, design: .rounded))
+                .padding(.trailing, 48)
+              Spacer()
+            }
+            HStack{
+              Text("Task")
+                .font(.system(size: 24, weight: .medium, design: .default))
+                .foregroundColor(.color("10275A"))
+              Spacer()
+              HStack(spacing: 6){
+                Image("Calendar")
+                  .padding(.top, 2)
+                Text("August 2021").font(.system(size: 12, weight: .medium, design: .default))
+                  .foregroundColor(.color("525F77"))
+              }
+              
+            }.padding(.top, 32)
+              .padding(.bottom, 15)
+            HStack(spacing: 0){
+              HStack{
+                Day(day: "MO", date: "12")
+                Spacer()
+                Day(day: "TU", date: "13")
+                Spacer()
+                Day(day: "WE", date: "14")
+                Spacer()
+              }
+              HStack{
+                Day(day: "TH", date: "15")
+                Spacer()
+                Day(day: "FR", date: "16")
+                Spacer()
+                Day(day: "SA", date: "17")
+                Spacer()
+                Day(day: "SU", date: "18")
+              }
+            }
+            HStack{
+              Text("Events")
+                .font(.system(size: 20, weight: .medium, design: .default))
+                .foregroundColor(.color("10275A"))
+              Spacer()
+            }.padding(.top, 24)
+              .padding(.bottom, 20)
+            VStack(spacing: 18){
+              CardPersonal(name: "Design Seminar", color: .color("8F81FE"), colorUrgent: .color("8F81FE"), time: "07:15 - 07:35", colorBackground: .color("ECEAFF"), colorBack: .color("F6F7FF"))
+              CardPersonal(name: "Design Seminar", color: .color("8F81FE"), colorUrgent: .color("8F81FE"), time: "07:00 - 07:15", colorBackground: .color("ECEAFF"), colorBack: .color("F6F7FF"))
+              CardPersonal(name: "Design Seminar", color: .color("8F81FE"), colorUrgent: .color("8F81FE"), time: "07:15 - 07:35", colorBackground: .color("ECEAFF"), colorBack: .color("F6F7FF"))
+            }
+            Spacer()
+            HStack{
+              Spacer()
+              Button {
+                addEvent.toggle()
+              } label: {
+                ZStack{
+                  Circle()
+                    .fill(LinearGradient(colors: [.color("5B67CA"), .color("A3A9D9")], startPoint:.topTrailing , endPoint: .bottomLeading))
+                    .frame(width: 50)
+                    .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
+                  
+                  //.background(in: Circle(), fillStyle: LinearGradient(colors: [.color("5B67CA"), .color("A3A9D9")], startPoint: .bottomLeading, endPoint: .topTrailing))
+                  Text("+")
+                    .font(.system(size: 24))
+                    .foregroundColor(.white)
+                }
+              }
+            }.ignoresSafeArea().padding(.top, 41)
+          }
+          
+          
+        }.padding(.horizontal, 24)
+        //.background(.white).safeAreaInset(edge: .bottom) {
+        //TabDailoz(isSelectedHome: false, isSelectedTask: true, isSelectedGraphic: false, isSelectedProfile: false)}
+          .background(.white)
+      }
+      if self.addEvent {
+        //Spacer()
+        GeometryReader { _ in
+          AddTask(tittle: "Add Event", hasType: false, returnBack: $returnBack)
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+        //.padding(.leading, 64)
+        //.padding(.top, 126)
+        .background {
+          Color.black.opacity(0.6)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.addEvent.toggle()
+              //}
+            }
+        }
+      }
+      if self.returnBack {
+        //Spacer()
+        GeometryReader { _ in
+          Event()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+        //.padding(.leading, 64)
+        //.padding(.top, 126)
+        .background {
+          Color.black.opacity(0.6)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.returnBack.toggle()
+              //}
+            }
+        }
+      }
+      if self.returnProfile {
+        //Spacer()
+        GeometryReader { _ in
+          Profile1()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+        //.padding(.leading, 64)
+        //.padding(.top, 126)
+        .background {
+          Color.black.opacity(0)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.returnProfile.toggle()
+              //}
+            }
+        }
+      }
+
+    }
     
   }
 }
@@ -750,154 +701,3 @@ struct Event_Previews: PreviewProvider {
   }
 }
 
-struct AddEvent: View {
-  var body: some View {
-    VStack(alignment: .leading, spacing: 0){
-      HStack{
-        Image("Image 26")
-          .padding(.horizontal, 20.5)
-          .padding(.top, 18)
-          .padding(.bottom, 16)
-          .background(.white)
-          .cornerRadius(14)
-          .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-        Spacer()
-        Text("Add Event")
-          .font(.system(size: 18, weight: .medium, design: .rounded))
-          .padding(.trailing, 48)
-        Spacer()
-      }.padding(.bottom, 31)
-      VStack(alignment: .leading, spacing: 0){
-        VStack(alignment: .leading, spacing: 0){
-          Text("Tittle")
-            .font(.system(size: 14, weight: .medium, design: .rounded))
-            .foregroundColor(.color("8A8BB3"))
-          Text("Plan for a month")
-            .font(.system(size: 16, weight: .medium, design: .rounded))
-            .foregroundColor(.color("10275A"))
-            .padding(.top, 16)
-            .padding(.bottom, 18)
-          Rectangle().frame(width: .infinity, height: 1).foregroundColor(.color("E8E9F3"))
-        }
-        VStack(alignment: .leading, spacing: 0){
-          Text("Date")
-            .font(.system(size: 14, weight: .medium, design: .rounded))
-            .foregroundColor(.color("8A8BB3"))
-            .padding(.top, 21)
-          HStack{
-            Text("4 August 2021")
-              .font(.system(size: 16, weight: .medium, design: .rounded))
-              .foregroundColor(.color("10275A"))
-              .padding(.top, 16)
-              .padding(.bottom, 18)
-            Spacer()
-            Image("Image 39")
-          }
-          Rectangle().frame(width: .infinity, height: 1).foregroundColor(.color("E8E9F3"))
-        }
-        VStack(alignment: .leading, spacing: 0){
-          Text("Time")
-            .font(.system(size: 14, weight: .medium, design: .rounded))
-            .foregroundColor(.color("8A8BB3"))
-            .padding(.top, 25)
-          HStack(spacing: 15.94){
-            VStack(spacing: 0){
-              Text("07:00 AM")
-                .font(.system(size: 16, weight: .medium, design: .rounded))
-                .foregroundColor(.color("10275A"))
-                .padding(.bottom, 18)
-              Rectangle().frame(width: .infinity, height: 1).foregroundColor(.color("E8E9F3"))
-            }
-            VStack(spacing: 0){
-              Text("07:30 AM")
-                .font(.system(size: 16, weight: .medium, design: .rounded))
-                .foregroundColor(.color("10275A"))
-                .padding(.bottom, 18)
-              Rectangle().frame(width: .infinity, height: 1).foregroundColor(.color("E8E9F3"))
-            }
-            
-          }.padding(.top, 16)
-           
-          
-        }
-        VStack(alignment: .leading, spacing: 0){
-          Text("Description")
-            .font(.system(size: 14, weight: .medium, design: .rounded))
-            .foregroundColor(.color("8A8BB3"))
-            .padding(.top, 25)
-          HStack{
-            Text("Creating this month's work plan")
-              .font(.system(size: 16, weight: .medium, design: .rounded))
-              .foregroundColor(.color("10275A"))
-              .padding(.top, 16)
-              .padding(.bottom, 18)
-            Spacer()
-            VStack(spacing: 1.92){
-              Rectangle().frame(width: 1.75, height: 1.75)
-              Rectangle().frame(width: 1.75, height: 1.75)
-              Rectangle().frame(width: 1.75, height: 1.75)
-            }.foregroundColor(.color("A8AEDF"))
-          }
-          Rectangle().frame(width: .infinity, height: 1).foregroundColor(.color("E8E9F3"))
-        }
-      
-        VStack(alignment: .leading, spacing: 0){
-          Text("Tags")
-            .font(.system(size: 14, weight: .medium, design: .rounded))
-            .foregroundColor(.color("8A8BB3"))
-          HStack(spacing: 6){
-            Text("Office")
-              .foregroundColor(.color("8F81FE"))
-              .frame(width: 77, height: 34)
-              .background(.color("ECEAFF"))
-              .cornerRadius(20)
-            Text("Home")
-              .foregroundColor(.color("F0A58E"))
-              .frame(width: 77, height: 34)
-              .background(.color("FFEFEB"))
-              .cornerRadius(20)
-            Text("Urgent")
-              .foregroundColor(.color("F57C96"))
-              .frame(width: 82, height: 34)
-              .background(.color("FFE9ED"))
-              .cornerRadius(20)
-            Text("Work")
-              .foregroundColor(.color("1EC1C3"))
-              .frame(width: 73, height: 34)
-              .background(.color("D1FEFF"))
-              .cornerRadius(20)
-          }.font(.system(size: 14, weight: .medium, design: .default))
-            .padding(.top, 22)
-                      .padding(.bottom, 16)
-        }.padding(.top, 25)
-        HStack{
-          Spacer()
-          Text("+ Add new tag")
-            .font(.system(size: 12, weight: .medium, design: .rounded))
-            .foregroundColor(.color("12175D"))
-            .multilineTextAlignment(.center)
-          Spacer()
-        }
-        Spacer()
-        Text("Create")
-          .font(.system(size: 18, weight: .medium, design: .rounded))
-          .foregroundColor(.white)
-          .padding(.vertical,15)
-          .padding(.bottom, 5)
-          .frame(maxWidth: .infinity)
-          .background(.color("5B67CA"))
-          .cornerRadius(14)
-          .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-        
-        
-      }
-    }.padding(.horizontal, 24)
-    
-  }
-}
-
-struct AddEvent_Previews: PreviewProvider {
-  static var previews: some View {
-    AddEvent()
-  }
-}

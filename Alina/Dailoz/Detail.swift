@@ -79,9 +79,7 @@ struct Detail: View {
         .foregroundColor(.color("10275A"))
       VStack(spacing: 13){
         HStack(spacing: 14){
-          Rectangle().frame(width: 24, height: 24).overlay(RoundedRectangle(cornerRadius: 8.62).stroke(.color("E3EAFF"), lineWidth: 1.58 )).foregroundColor(.clear)
-            .shadow(color: .color("F1F7FF"), radius: 4, x: -1.85, y: 4.31)
-            .padding(.bottom, 17)
+          Choice2()
           VStack(alignment: .leading, spacing: 0){
             Text("Creating this month's work \nplan")
               .font(.system(size: 16, weight: .medium, design: .rounded))
@@ -91,9 +89,7 @@ struct Detail: View {
           }
         }
         HStack(spacing: 14){
-          Rectangle().frame(width: 24, height: 24).overlay(RoundedRectangle(cornerRadius: 8.62).stroke(.color("E3EAFF"), lineWidth: 1.58 )).foregroundColor(.clear)
-            .shadow(color: .color("F1F7FF"), radius: 4, x: -1.85, y: 4.31)
-            .padding(.bottom, 17)
+          Choice2()
           VStack(alignment: .leading, spacing: 0){
             Text("Creating this month's work \nplan")
               .font(.system(size: 16, weight: .medium, design: .rounded))
@@ -102,8 +98,7 @@ struct Detail: View {
           }
         }
         HStack(spacing: 11){
-          Image("Image 46")
-            .padding(.bottom, 14)
+          Choice2()
           VStack(alignment: .leading, spacing: 0){
             Text("Creating this month's work \nplan")
               .font(.system(size: 16, weight: .medium, design: .rounded))
@@ -112,7 +107,7 @@ struct Detail: View {
           }
         }
         HStack(spacing: 11){
-          Image("Image 46").padding(.bottom, 14)
+          Choice2()
           VStack(alignment: .leading, spacing: 0){
             Text("Creating this month's work \nplan")
               .font(.system(size: 16, weight: .medium, design: .rounded))
@@ -161,5 +156,22 @@ struct Detail: View {
 struct Detail_Previews: PreviewProvider {
   static var previews: some View {
     Detail()
+  }
+}
+struct Choice2: View {
+  @State var isSelected = false
+  var body: some View {
+    Button {
+      isSelected.toggle()
+    } label: {
+      if isSelected{
+        Image("Image 46")
+          .padding(.bottom, 14)
+      } else {
+        Rectangle().frame(width: 24, height: 24).overlay(RoundedRectangle(cornerRadius: 8.62).stroke(.color("E3EAFF"), lineWidth: 1.58 )).foregroundColor(.clear)
+          .shadow(color: .color("F1F7FF"), radius: 4, x: -1.85, y: 4.31)
+          .padding(.bottom, 17)
+      }
+    }
   }
 }

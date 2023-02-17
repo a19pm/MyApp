@@ -83,12 +83,7 @@ struct SteamCommunityView: View {
                         Rectangle().frame(height: 1).foregroundColor(.color("303649"))
                             .padding(.bottom, 15)
                         HStack(spacing: 0){
-                            Image("thumbup")
-                                .padding(.trailing, 8)
-                            Text("324")
-                                .foregroundColor(.color("00D44B"))
-                                .font(.system(size: 14, weight: .medium, design: .rounded))
-                                .padding(.trailing, 34)
+                            Like()
                             Image("message-square")
                                 .padding(.trailing, 8)
                             Text("12")
@@ -142,15 +137,41 @@ struct SteamCommunityView_Previews: PreviewProvider {
 
 struct ScrollIcons: View {
     var name: String
-    var isSelected: Bool
+    //var isSelected: Bool
+  @State var isSelected = false
     var body: some View {
+      Button {
+        isSelected.toggle()
+      } label: {
         Text(name)
-            .foregroundColor(.white)
-            .font(.system(size: 14, weight: .semibold, design: .default))
-            .padding(.horizontal, 14)
-            .padding(.vertical, 8)
-            .frame(height: 38)
+          .foregroundColor(.white)
+          .font(.system(size: 14, weight: .semibold, design: .default))
+          .padding(.horizontal, 14)
+          .padding(.vertical, 8)
+          .frame(height: 38)
         //.background(.color("303649"), in: RoundedRectangle(cornerRadius: 8))
-            .background(isSelected ? .color("31BCFC") : .color("303649"), in: RoundedRectangle(cornerRadius: 8))
+          .background(isSelected ? .color("31BCFC") : .color("303649"), in: RoundedRectangle(cornerRadius: 8))
+      }
     }
 }
+struct Like: View {
+  @State var isLiked = false
+  var body: some View {
+    Button{
+      isLiked.toggle()
+    } label: {
+      HStack(spacing: 0){
+            Image("thumbup")
+          .renderingMode(isLiked ? .original : .template)
+          .foregroundColor(isLiked ? .clear : .color("4B5664"))
+              .padding(.trailing, 8)
+            Text("324")
+          .foregroundColor(isLiked ? .color("00D44B") : .color("4B5664"))
+              .font(.system(size: 14, weight: .medium, design: .rounded))
+              .padding(.trailing, 34)
+          }
+    }
+    
+  }
+}
+//.foregroundColor(.color("4B5664"))

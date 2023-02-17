@@ -50,11 +50,11 @@ struct BigSave: View {
                         .padding(.vertical,15)
                         .padding(.bottom, 10)
                     Spacer()
-                    CardView(isSelected: true, bank: "Redblue", paymentProcessor: "Mastercard", name: "Jenny Barnes", cardNumber: "5868", currency: "$", balance: "2,345", pense: "34")
+                    CardView(bank: "Redblue", paymentProcessor: "Mastercard", name: "Jenny Barnes", cardNumber: "5868", currency: "$", balance: "2,345", pense: "34")
                     
-                    CardView(isSelected: false, bank: "Citybank", paymentProcessor: "Visa", name: "Jenny Barnes", cardNumber: "4327", currency: "$", balance: "257", pense: "12")
+                    CardView(bank: "Citybank", paymentProcessor: "Visa", name: "Jenny Barnes", cardNumber: "4327", currency: "$", balance: "257", pense: "12")
                     
-                    CardView(isSelected: false, bank: "Capital", paymentProcessor: "", name: "", cardNumber: "", currency: "", balance: "", pense: "")
+                    CardView(bank: "Capital", paymentProcessor: "", name: "", cardNumber: "", currency: "", balance: "", pense: "")
                 }
                 
             }.background(.color("F5F5F5"))
@@ -82,7 +82,7 @@ struct BigSave_Previews: PreviewProvider {
 }
 
 struct CardView: View {
-    var isSelected: Bool
+   // var isSelected: Bool
     var bank: String
     var paymentProcessor: String
     var name: String
@@ -90,36 +90,42 @@ struct CardView: View {
     var currency: String
     var balance: String
     var pense: String
+  @State var isSelected = false
     var body: some View {
+      Button {
+        isSelected.toggle()
+      } label: {
         VStack {
-            HStack{
-                Image(bank)
-                Spacer()
-                Image(paymentProcessor)
-            }
-            Spacer()
-            if isSelected {
-                HStack {
-                    Text("Selected").foregroundColor(.color("1CE1AC"))
-                    Spacer()
-                }
-            }
-            HStack {
-                Text("\(name)\n ...\(cardNumber)").foregroundColor(.color("746A96"))
-                Spacer()
-                Text(currency).padding(.bottom, -10).foregroundColor(.color("746A96"))
-                Text(balance).font(.system(size: 30, weight: .light, design: .default)).foregroundColor(.color("746A96"))
-                Text(pense).padding(.bottom, 10).foregroundColor(.color("746A96"))
-            }
-        }.padding()
-            .background(RoundedRectangle(cornerRadius: 19)
-                .fill(.white)
-                .shadow(color: .color("d3d3d3").opacity(0.5), radius: 14, x: 0, y: 6))
-            .overlay(RoundedRectangle(cornerRadius: 19)
-                .stroke(.color("1CE1AC"), lineWidth: isSelected ? 2 : 0))
-            .frame(height: 160)
-            .padding(.horizontal, 15)
-            .padding(.bottom,20)
+                 HStack{
+                     Image(bank)
+                     Spacer()
+                     Image(paymentProcessor)
+                 }
+                 Spacer()
+                 if isSelected {
+                     HStack {
+                         Text("Selected").foregroundColor(.color("1CE1AC"))
+                         Spacer()
+                     }
+                 }
+                 HStack {
+                     Text("\(name)\n ...\(cardNumber)").foregroundColor(.color("746A96"))
+                     Spacer()
+                     Text(currency).padding(.bottom, -10).foregroundColor(.color("746A96"))
+                     Text(balance).font(.system(size: 30, weight: .light, design: .default)).foregroundColor(.color("746A96"))
+                     Text(pense).padding(.bottom, 10).foregroundColor(.color("746A96"))
+                 }
+             }.padding()
+                 .background(RoundedRectangle(cornerRadius: 19)
+                     .fill(.white)
+                     .shadow(color: .color("d3d3d3").opacity(0.5), radius: 14, x: 0, y: 6))
+                 .overlay(RoundedRectangle(cornerRadius: 19)
+                     .stroke(.color("1CE1AC"), lineWidth: isSelected ? 2 : 0))
+                 .frame(height: 160)
+                 .padding(.horizontal, 15)
+                 .padding(.bottom,20)
+      }
+     
     }
 }
 

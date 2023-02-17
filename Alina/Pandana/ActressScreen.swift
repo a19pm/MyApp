@@ -28,26 +28,14 @@ struct ActressScreen: View {
       
     }.safeAreaInset(edge: .bottom) {
       HStack(spacing: 0){
-       
-        Text("Biography")
-          .font(.system(size: 12, weight: .semibold, design: .default))
-          .foregroundColor(.color("616161"))
+       BottomMenu(text: "Biography")
         Spacer()
-        Text("Featured films")
-          .font(.system(size: 12, weight: .semibold, design: .default))
-          .foregroundColor(.color("616161"))
+        BottomMenu(text: "Featured films")
         Spacer()
-        Text("Directory's")
-                 .font(.system(size: 12, weight: .semibold, design: .default))
-                 .foregroundColor(.color("FFFFFF"))
-                 //.padding()
-                 .padding(.vertical, 10)
-                 .padding(.horizontal, 12)
-                 .background(.color("3544C4"))
-                 .cornerRadius(6)
-                 .shadow(color: .color("3544C4").opacity(0.6), radius: 34, x: 10, y: 32)
-               
-      }.padding(.leading, 24).padding(.trailing, 7)
+        BottomMenu(text: "Directory's")
+      }
+      .padding(.leading, 24)
+       .padding(.trailing, 7)
         .padding(.vertical, 7)
         .background(.white, in: RoundedRectangle(cornerRadius: 6))
       //.padding(.top, 10)
@@ -72,6 +60,31 @@ struct ActressScreen_Previews: PreviewProvider {
     ActressScreen()
   }
 }
+struct BottomMenu: View {
+  @State var isSelected = false
+  var text : String
+  var body: some View {
+    Button {
+      isSelected.toggle()
+    } label: {
+      Text(text)
+            .font(.system(size: 12, weight: .regular, design: .default))
+            .foregroundColor( isSelected ? .color("FFFFFF") : .color("616161"))
+            .padding(.vertical, isSelected ? 10 : 0)
+            .padding(.horizontal, isSelected ? 12 : 0)
+            .background(isSelected ? .color("3544C4") : .clear)
+            .cornerRadius(isSelected ? 6 : 0)
+            .shadow(color: isSelected ? .color("3544C4").opacity(0.6) : .clear, radius: 34, x: 10, y: 32)
+//            .padding(.leading,  isSelected ? 9 : 24)
+//             .padding(.trailing, isSelected 16)
+      //
+      //Spacer()
+    }
+     
+   // Spacer()
+    
+  }
+}
 
 struct FilmCard2: View {
   var image: String
@@ -82,6 +95,7 @@ struct FilmCard2: View {
   var hours: String
   var isSecondGenre: Bool
   var genre2: String
+  @State var isLiked = false
   var body: some View {
     
       HStack(alignment: .center, spacing: 28){
@@ -95,11 +109,21 @@ struct FilmCard2: View {
               .frame(width: 118, height: 144)
               .mask(Rectangle().cornerRadius(13).frame(width: 118, height: 144))
           }
-          Image("i 39")
-            .padding(9)
-            .background(.ultraThinMaterial)
-            .cornerRadius(16)
-            .padding(12)
+          Button {
+            isLiked.toggle()
+          } label: {
+            Image(isLiked ? "i 39" : "i 17")
+            // Image("i 39")
+              .padding(9)
+              .background(.ultraThinMaterial)
+              .cornerRadius(16)
+              .padding(12)
+          }
+//          Image("i 39")
+//            .padding(9)
+//            .background(.ultraThinMaterial)
+//            .cornerRadius(16)
+//            .padding(12)
         }
         VStack(alignment: .leading,spacing: 5) {
           Text("\(name) :\n\(producer)")
@@ -225,23 +249,11 @@ struct ActressScreen2: View {
     }.safeAreaInset(edge: .bottom) {
       HStack(spacing: 0){
        
-        Text("Biography")
-          .font(.system(size: 12, weight: .regular, design: .default))
-          .foregroundColor(.color("FFFFFF"))
-          .padding(.vertical, 10)
-          .padding(.horizontal, 12)
-          .background(.color("3544C4"))
-          .cornerRadius(6)
-          .shadow(color: .color("3544C4").opacity(0.6), radius: 34, x: 10, y: 32)
-        Spacer()
-        Text("Featured films")
-          .font(.system(size: 12, weight: .regular, design: .default))
-          .foregroundColor(.color("616161"))
-        Spacer()
-        Text("Directory's")
-                 .font(.system(size: 12, weight: .regular, design: .default))
-                 .foregroundColor(.color("616161"))
-                 //.padding()
+        BottomMenu(text: "Biography")
+         Spacer()
+         BottomMenu(text: "Featured films")
+         Spacer()
+         BottomMenu(text: "Directory's")
                  
                
       }.padding(.leading, 9).padding(.trailing, 16)
@@ -322,24 +334,11 @@ struct ActressScreen3: View {
     }.safeAreaInset(edge: .bottom) {
       HStack(spacing: 0){
        
-        Text("Biography")
-          .font(.system(size: 12, weight: .semibold, design: .default))
-          .foregroundColor(.color("616161"))
-        Spacer()
-        Text("Featured films")
-          .font(.system(size: 12, weight: .semibold, design: .default))
-          .foregroundColor(.color("FFFFFF"))
-          .padding(.vertical, 10)
-          .padding(.horizontal, 12)
-          .background(.color("3544C4"))
-          .cornerRadius(6)
-          .shadow(color: .color("3544C4").opacity(0.6), radius: 34, x: 10, y: 32)
-        Spacer()
-        Text("Directory's")
-                 .font(.system(size: 12, weight: .semibold, design: .default))
-                 .foregroundColor(.color("616161"))
-                 //.padding()
-                 
+        BottomMenu(text: "Biography")
+         Spacer()
+         BottomMenu(text: "Featured films")
+         Spacer()
+         BottomMenu(text: "Directory's")
                
       }.padding(.leading, 24).padding(.trailing, 7)
         .padding(.vertical, 7)

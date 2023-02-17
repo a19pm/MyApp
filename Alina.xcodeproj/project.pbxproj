@@ -16,6 +16,7 @@
 		1331B64A2951EEBE00AC4FF4 /* Steam Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1331B6492951EEBE00AC4FF4 /* Steam Chat.swift */; };
 		1331B64C295204EB00AC4FF4 /* SteamStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1331B64B295204EB00AC4FF4 /* SteamStore.swift */; };
 		1331B64F2953060200AC4FF4 /* Pixels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1331B64E2953060200AC4FF4 /* Pixels.swift */; };
+		133C9D8D29892C3D00EF5CDC /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133C9D8C29892C3D00EF5CDC /* TabBar.swift */; };
 		13855480297AD68200F317DC /* Popular Movie Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1385547F297AD68200F317DC /* Popular Movie Screen.swift */; };
 		13855482297AF5D500F317DC /* Trailer Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13855481297AF5D500F317DC /* Trailer Screen.swift */; };
 		13855484297C106500F317DC /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13855483297C106500F317DC /* ProfileScreen.swift */; };
@@ -62,6 +63,7 @@
 		1331B6492951EEBE00AC4FF4 /* Steam Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Steam Chat.swift"; sourceTree = "<group>"; };
 		1331B64B295204EB00AC4FF4 /* SteamStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteamStore.swift; sourceTree = "<group>"; };
 		1331B64E2953060200AC4FF4 /* Pixels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pixels.swift; sourceTree = "<group>"; };
+		133C9D8C29892C3D00EF5CDC /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		1385547F297AD68200F317DC /* Popular Movie Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Popular Movie Screen.swift"; sourceTree = "<group>"; };
 		13855481297AF5D500F317DC /* Trailer Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trailer Screen.swift"; sourceTree = "<group>"; };
 		13855483297C106500F317DC /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				13F3344B29717642006E75AB /* Task.swift */,
 				13F3344D2971FF89006E75AB /* Detail.swift */,
 				13F3344F297587D4006E75AB /* Personal.swift */,
+				133C9D8C29892C3D00EF5CDC /* TabBar.swift */,
 			);
 			path = Dailoz;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				13F3344A296F6AFE006E75AB /* FilterByCalenar.swift in Sources */,
 				13F3345229759C61006E75AB /* CalendarView.swift in Sources */,
 				1314D87529788A4F002C0E67 /* Home Screen.swift in Sources */,
+				133C9D8D29892C3D00EF5CDC /* TabBar.swift in Sources */,
 				132E75E829816C6B00516B5A /* ContentView.swift in Sources */,
 				13855484297C106500F317DC /* ProfileScreen.swift in Sources */,
 				139AD7CA291104AE00627579 /* ContentView2.swift in Sources */,

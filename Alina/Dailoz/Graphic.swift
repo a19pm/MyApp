@@ -99,55 +99,60 @@ struct Priority: View {
 }
 
 struct Graphic: View {
+  @State var isSelectedHome = false
+  @State  var isSelectedTask = false
+  @State  var isSelectedGraphic = false
+  @State   var isSelectedProfile = false
   var body: some View {
     ZStack{
-      ScrollView{
-        VStack(spacing: 0){
-          VStack{
-            Text("Graphic")
-              .font(.system(size: 18, weight: .medium, design: .default))
-              .foregroundColor(.color("10275A"))
-          }
-          VStack(alignment: .leading, spacing: 0){
-            HStack(alignment: .firstTextBaseline, spacing: 5){
-              Text("Priority")
+      ZStack{
+        ScrollView{
+          VStack(spacing: 0){
+            VStack{
+              Text("Graphic")
+                .font(.system(size: 18, weight: .medium, design: .default))
+                .foregroundColor(.color("10275A"))
+            }
+            VStack(alignment: .leading, spacing: 0){
+              HStack(alignment: .firstTextBaseline, spacing: 5){
+                Text("Priority")
+                  .font(.system(size: 20, weight: .medium, design: .default))
+                  .foregroundColor(.color("10275A"))
+                Spacer()
+                Circle().frame(width: 8).foregroundColor(.color("E88B8C"))
+                Text("Personal")
+                  .font(.system(size: 12, weight: .medium, design: .default))
+                  .foregroundColor(.color("10275A"))
+                Circle().frame(width: 8).foregroundColor(.color("8F99EB"))
+                Text("Private")
+                  .font(.system(size: 12, weight: .medium, design: .default))
+                  .foregroundColor(.color("10275A"))
+                Circle().frame(width: 8).foregroundColor(.color("7EC8E7"))
+                Text("Secret")
+                  .font(.system(size: 12, weight: .medium, design: .default))
+                  .foregroundColor(.color("10275A"))
+              }
+              
+              Text("Task Perday")
+                .font(.system(size: 14, weight: .medium, design: .default))
+                .foregroundColor(.color("8586A9"))
+                .padding(.top, 12)
+                .padding(.bottom, 26)
+              Priority()
+              
+            }.padding(.leading, 15)
+              .padding(.trailing, 10)
+              .padding(.top, 14)
+              .padding(.bottom, 16)
+              .background(.color("F9FAFD") , in: RoundedRectangle(cornerRadius: 16))
+              .padding(.top, 38)
+              .padding(.bottom, 23)
+            HStack{
+              Text("Your activity")
                 .font(.system(size: 20, weight: .medium, design: .default))
                 .foregroundColor(.color("10275A"))
               Spacer()
-              Circle().frame(width: 8).foregroundColor(.color("E88B8C"))
-              Text("Personal")
-                .font(.system(size: 12, weight: .medium, design: .default))
-                .foregroundColor(.color("10275A"))
-              Circle().frame(width: 8).foregroundColor(.color("8F99EB"))
-              Text("Private")
-                .font(.system(size: 12, weight: .medium, design: .default))
-                .foregroundColor(.color("10275A"))
-              Circle().frame(width: 8).foregroundColor(.color("7EC8E7"))
-              Text("Secret")
-                .font(.system(size: 12, weight: .medium, design: .default))
-                .foregroundColor(.color("10275A"))
             }
-            
-            Text("Task Perday")
-              .font(.system(size: 14, weight: .medium, design: .default))
-              .foregroundColor(.color("8586A9"))
-              .padding(.top, 12)
-              .padding(.bottom, 26)
-            Priority()
-            
-          }.padding(.leading, 15)
-            .padding(.trailing, 10)
-            .padding(.top, 14)
-            .padding(.bottom, 16)
-            .background(.color("F9FAFD") , in: RoundedRectangle(cornerRadius: 16))
-            .padding(.top, 38)
-            .padding(.bottom, 23)
-          HStack{
-            Text("Your activity")
-              .font(.system(size: 20, weight: .medium, design: .default))
-              .foregroundColor(.color("10275A"))
-            Spacer()
-          }
             
             VStack(spacing: 31){
               HStack{
@@ -173,29 +178,100 @@ struct Graphic: View {
               }.padding(.horizontal, 41)
               
             }.padding(.top, 28).padding(.bottom, 42).background(.color("F9FAFD") , in: RoundedRectangle(cornerRadius: 16))
-            .padding(.top, 23)
-          
-         
-          
-         
-         
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
+              .padding(.top, 23)
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
           }.padding(.horizontal,24)
         }.background(.white).safeAreaInset(edge: .bottom) {
-          TabDailoz(isSelectedHome: false, isSelectedTask: false, isSelectedGraphic: true, isSelectedProfile: false)}
+          TabDailoz(isSelectedHome: $isSelectedHome, isSelectedTask: $isSelectedTask, isSelectedGraphic: $isSelectedGraphic, isSelectedProfile: $isSelectedProfile)}
       }
       
-
-    
+      if self.isSelectedHome {
+          //Spacer()
+          GeometryReader { _ in
+            Home()
+          }.frame(maxWidth: .infinity)
+          //.frame(alignment: .trailing)
+//        .padding(.leading, 206)
+//          .padding(.top, 76)
+          .background {
+           Color.black.opacity(0)
+              .edgesIgnoringSafeArea(.all)
+              .onTapGesture {
+                //withAnimation {
+                  self.isSelectedHome.toggle()
+                //}
+              }
+          }
+      }
+      if self.isSelectedTask {
+          //Spacer()
+          GeometryReader { _ in
+            Task()
+          }.frame(maxWidth: .infinity)
+          //.frame(alignment: .trailing)
+//        .padding(.leading, 206)
+//          .padding(.top, 76)
+          .background {
+           Color.black.opacity(0)
+              .edgesIgnoringSafeArea(.all)
+              .onTapGesture {
+                //withAnimation {
+                  self.isSelectedTask.toggle()
+                //}
+              }
+          }
+      }
+      if self.isSelectedGraphic {
+          //Spacer()
+          GeometryReader { _ in
+            Graphic()
+          }.frame(maxWidth: .infinity)
+          //.frame(alignment: .trailing)
+//        .padding(.leading, 206)
+//          .padding(.top, 76)
+          .background {
+           Color.black.opacity(0)
+              .edgesIgnoringSafeArea(.all)
+              .onTapGesture {
+                //withAnimation {
+                  self.isSelectedGraphic.toggle()
+                //}
+              }
+          }
+      }
+      if self.isSelectedProfile {
+          //Spacer()
+          GeometryReader { _ in
+            Profile1()
+          }.frame(maxWidth: .infinity)
+          //.frame(alignment: .trailing)
+//        .padding(.leading, 206)
+//          .padding(.top, 76)
+          .background {
+           Color.black.opacity(0)
+              .edgesIgnoringSafeArea(.all)
+              .onTapGesture {
+                //withAnimation {
+                  self.isSelectedProfile.toggle()
+                //}
+              }
+          }
+      }
+    }
   }
 }
 

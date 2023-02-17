@@ -176,3 +176,141 @@ struct PopularMovieBackground: View {
     }.ignoresSafeArea()
   }
 }
+
+struct FilmsScroll: View {
+  var image1: String
+  var image2: String
+  var image3: String
+  
+  var body: some View {
+    HStack(alignment: .top, spacing: 40){
+      Image(image1)
+        .cornerRadius(22)
+        .padding(9)
+        .background(.color("FFFFFF").opacity(0.31))
+        .cornerRadius(22+9)
+        .rotationEffect(.degrees(-5))
+        .shadow(color: .color("19142C").opacity(0.43), radius: 36, x: 0, y: 62)
+        .padding(.top, 23.52)
+      ZStack(alignment: .topLeading){
+        ZStack(alignment: .topTrailing){
+          Image(image2)
+            .cornerRadius(22)
+            .padding(9)
+            .background(.color("FFFFFF").opacity(0.31))
+            .cornerRadius(22+9)
+            .shadow(color: .color("57010F").opacity(0.31), radius: 36, x: 0, y: 62)
+          Image("i 32")
+            .offset(x: 20, y: 25)
+        }
+        HStack{
+          Image("i 31")
+          Text("7.2")
+            .font(.system(size: 14, weight: .semibold, design: .default))
+            .foregroundColor(.white)
+        }.padding(.vertical, 8)
+          .padding(.leading, 14)
+          .padding(.trailing, 12)
+          .background(.ultraThinMaterial)
+          .cornerRadius(16)
+          .padding(.leading, 21)
+          .padding(.top, 19)
+      }
+      Image(image3)
+        .cornerRadius(22)
+        .padding(9)
+        .background(.color("FFFFFF").opacity(0.31))
+        .cornerRadius(22+9)
+        .rotationEffect(.degrees(5))
+        .shadow(color: .color("19142C").opacity(0.43), radius: 36, x: 0, y: 62)
+        .padding(.top, 23.52)
+      
+    }.padding([.bottom, .horizontal], 122)
+  }
+}
+
+struct F_Previews: PreviewProvider {
+  static var previews: some View {
+//    FilmsScroll(image1: "i 30", image2: "i 30", image3: "i 30")
+    ContentView5()
+  }
+}
+
+//struct S: View {
+//  var body: some View {
+    struct Item: Identifiable {
+        var id: Int
+        var title: String
+        var color: Color
+    }
+
+    class Store: ObservableObject {
+        @Published var items: [Item]
+        
+        let colors: [Color] = [.red, .orange, .blue, .teal, .mint, .green, .gray, .indigo, .black]
+
+        // dummy data
+        init() {
+            items = []
+            for i in 0...7 {
+                let new = Item(id: i, title: "Item \(i)", color: colors[i])
+                items.append(new)
+            }
+        }
+    }
+
+
+struct ContentView5: View {
+  
+  @StateObject var store = Store()
+  @State private var snappedItem = 0.0
+  @State private var draggingItem = 0.0
+  
+  var body: some View {
+    
+    ZStack {
+      ForEach(store.items) { item in
+        
+        // article view
+        ZStack {
+          RoundedRectangle(cornerRadius: 18)
+            .fill(item.color)
+          Text(item.title)
+            .padding()
+        }
+        .frame(width: 200, height: 200)
+        
+        .scaleEffect(1.0 - abs(distance(item.id)) * 0.2 )
+        .opacity(1.0 - abs(distance(item.id)) * 0.3 )
+        .offset(x: myXOffset(item.id), y: 0)
+        .zIndex(1.0 - abs(distance(item.id)) * 0.1)
+        .rotationEffect(.degrees(5 * distance(item.id)))
+      }
+    }
+    .gesture(
+      DragGesture()
+        .onChanged { value in
+          draggingItem = snappedItem + value.translation.width / 100
+        }
+        .onEnded { value in
+          withAnimation {
+            draggingItem = snappedItem + value.predictedEndTranslation.width / 100
+            draggingItem = round(draggingItem).remainder(dividingBy: Double(store.items.count))
+            snappedItem = draggingItem
+          }
+        }
+    )
+  }
+  
+  func distance(_ item: Int) -> Double {
+    return (draggingItem - Double(item)).remainder(dividingBy: Double(store.items.count))
+  }
+  
+  func myXOffset(_ item: Int) -> Double {
+    let angle = Double.pi * 2 / Double(store.items.count) * distance(item)
+    return sin(angle) * 300
+  }
+  
+}
+//  }
+//}

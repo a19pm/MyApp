@@ -8,83 +8,122 @@
 import SwiftUI
 
 struct Completed: View {
+  @State var show = false
+  @State var returnBack = false
+  @State var showCalendar = false
   var body: some View {
-    ScrollView{
-      VStack(alignment: .leading, spacing: 0){
-        HStack{
-          Image("Image 26")
-            .padding(.horizontal, 20.5)
-            .padding(.top, 18)
-            .padding(.bottom, 16)
-              .background(.white)
-              .cornerRadius(14)
-              .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-          Spacer()
-          Text("Completed Task")
-            .font(.system(size: 18, weight: .medium, design: .rounded))
-            .padding(.trailing, 48)
-          Spacer()
+    ZStack{
+      ScrollView{
+        VStack(alignment: .leading, spacing: 0){
+        UpView(title: "Completed Task", returnBackProfile: $returnBack, showCalendar: $showCalendar)
+          HStack(spacing: 17){
+            Image("Image 31")
+            Text("May 2021")
+              .font(.system(size: 20, weight: .medium, design: .rounded))
+          }.padding(.bottom, 25)
+          
+          Text("14 May 2021")
+            .font(.system(size: 14, weight: .medium, design: .rounded))
+            .foregroundColor(.color("525F77"))
+            .padding(.bottom, 22)
+            .padding(.leading, -8)
+          ScrollView(.horizontal){
+            HStack{
+              Button(action: {
+                withAnimation{
+                  show.toggle()
+                }
+              }, label: {
+                CardCompleted(name: "Cleaning Clothes", color: .color("46C7FE"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"))
+              })
+              CardCompleted(name: "Cleaning Clothes", color: .color("46C7FE"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"))
+            }
+          }.padding(.trailing, -24)
+            .padding(.bottom, 25)
+          
+          Text("15 May 2021")
+            .font(.system(size: 14, weight: .medium, design: .rounded))
+            .foregroundColor(.color("525F77"))
+            .padding(.bottom, 22)
+            .padding(.leading, -8)
+
+          ScrollView(.horizontal){
+            HStack{
+              CardCompleted(name: "Cleaning Clothes", color: .color("46C7FE"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"))
+              CardCompleted(name: "Cleaning Clothes", color: .color("46C7FE"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"))
+            }
+          }.padding(.trailing, -24)
+            .padding(.bottom, 25)
+          Text("16 May 2021")
+            .padding(.bottom, 22)
+            .font(.system(size: 14, weight: .medium, design: .rounded))
+            .foregroundColor(.color("525F77"))
+            .padding(.leading, -8)
+          ScrollView(.horizontal){
+            HStack{
+              CardCompleted(name: "Cleaning Clothes", color: .color("46C7FE"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"))
+              CardCompleted(name: "Cleaning Clothes", color: .color("46C7FE"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"))
+            }
+          }.padding(.trailing, -24)
+        }.padding(.horizontal,24)
+        
+        
+      }
+      if self.show {
+        //Spacer()
+        GeometryReader { _ in
+          CompletedPopUp()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+        .padding(.leading, 64)
+        .padding(.top, 280)
+        .background {
+          Color.black.opacity(0)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+              withAnimation {
+                self.show.toggle()
+              }
+            }
         }
-        HStack{
-          HStack(spacing: 15){
-                  Image("Search1")
-                  Text("Search for task")
-                    .font(.system(size: 14, weight: .medium, design: .default))
-                    .foregroundColor(.color("C8CDD9"))
-                  Spacer()
-                  Image("Image 29")
-                }.padding(.horizontal, 20)
-                  .padding(.vertical, 15)
-                .background(.color("F6F6F6"), in: Rectangle()).cornerRadius(15)
-          Image("Image 30")
-            .padding(13)
-            .background(.color("F6F6F6"))
-            .cornerRadius(15)
-        }.padding(.top, 31)
-          .padding(.bottom, 23)
-        HStack(spacing: 17){
-          Image("Image 31")
-          Text("May 2021")
-            .font(.system(size: 20, weight: .medium, design: .rounded))
-        }.padding(.bottom, 25)
-        Text("14 May 2021")
-          .font(.system(size: 14, weight: .medium, design: .rounded))
-          .foregroundColor(.color("525F77"))
-          .padding(.bottom, 22)
-          .padding(.leading, -8)
-        ScrollView(.horizontal){
-          HStack{
-            CardCompleted(name: "Cleaning Clothes", color: .color("46C7FE"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"))
-            CardCompleted(name: "Cleaning Clothes", color: .color("46C7FE"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"))
-          }
-        }.padding(.trailing, -24)
-          .padding(.bottom, 25)
-        Text("15 May 2021")
-          .font(.system(size: 14, weight: .medium, design: .rounded))
-          .foregroundColor(.color("525F77"))
-          .padding(.bottom, 22)
-          .padding(.leading, -8)
-        ScrollView(.horizontal){
-          HStack{
-            CardCompleted(name: "Cleaning Clothes", color: .color("46C7FE"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"))
-            CardCompleted(name: "Cleaning Clothes", color: .color("46C7FE"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"))
-          }
-        }.padding(.trailing, -24)
-          .padding(.bottom, 25)
-        Text("16 May 2021")
-          .padding(.bottom, 22)
-          .font(.system(size: 14, weight: .medium, design: .rounded))
-          .foregroundColor(.color("525F77"))
-          .padding(.leading, -8)
-        ScrollView(.horizontal){
-          HStack{
-            CardCompleted(name: "Cleaning Clothes", color: .color("46C7FE"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"))
-            CardCompleted(name: "Cleaning Clothes", color: .color("46C7FE"), colorUrgent: .color("F57C96"), time: "07:00 - 07:15", colorBackground: .color("FFE9ED"))
-          }
-        }.padding(.trailing, -24)
-      }.padding(.horizontal,24)
-    }
-    
+      }
+      if self.returnBack {
+        //Spacer()
+        GeometryReader { _ in
+         Home()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+//        .padding(.leading, 64)
+//        .padding(.top, 280)
+        .background {
+          Color.black.opacity(0)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.returnBack.toggle()
+             // }
+            }
+        }
+      }
+      if self.showCalendar {
+        //Spacer()
+        GeometryReader { _ in
+         Filter()
+        }//.frame(maxWidth: .infinity)
+        //.frame(alignment: .trailing)
+//        .padding(.leading, 64)
+         .padding(.top, 160)
+        .background {
+          Color.black.opacity(0.6)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+             // withAnimation {
+                self.showCalendar.toggle()
+             // }
+            }
+        }
+      }
+    }.background(.white)
   }
 }
 
@@ -99,23 +138,30 @@ struct CardCompleted: View {
   var colorUrgent: Color
   var time: String
   var colorBackground: Color
- 
+  //@State var show = false
   var body: some View {
+//    Button(action: {
+//           withAnimation{
+//             show.toggle()
+//           }
+//         }, label: {
     VStack(alignment: .leading, spacing: 21){
       HStack(spacing: 0){
         Rectangle()
           .frame(width: 2, height: 34.78).foregroundColor(color)
           .padding(.top, 7.11)
           .padding(.trailing, 10)
-        VStack(alignment: .leading, spacing: 8){
-          Text(name)
-            .font(.system(size: 16, weight: .medium, design: .default))
-            .foregroundColor(.color("2C406E"))
+     
+          VStack(alignment: .leading, spacing: 8){
+            Text(name)
+              .font(.system(size: 16, weight: .medium, design: .default))
+              .foregroundColor(.color("2C406E"))
             
-          Text(time)
-            .font(.system(size: 14, weight: .medium, design: .default))
-            .foregroundColor(.color("9AA8C7"))
-        }
+            Text(time)
+              .font(.system(size: 14, weight: .medium, design: .default))
+              .foregroundColor(.color("9AA8C7"))
+          }
+       
         Spacer()
         VStack(spacing: 1.92){
           Rectangle()
@@ -146,41 +192,60 @@ struct CardCompleted: View {
           .background(color.opacity(0.2))
           .cornerRadius(3)
       }.padding(.leading, 10)
+      
     }.padding(15)
       .padding(.trailing, -5)
       .background(.color("EBF9FF"), in: Rectangle()).cornerRadius(15)
-      
+//        // })
+//    if self.show {
+//        //Spacer()
+//        GeometryReader { _ in
+//          CompletedPopUp()
+//        }//.frame(maxWidth: .infinity)
+//        //.frame(alignment: .trailing)
+////      .padding(.leading, 206)
+////        .padding(.top, 76)
+//        .background {
+//         Color.black.opacity(0)
+//            .edgesIgnoringSafeArea(.all)
+//            .onTapGesture {
+//              withAnimation {
+//                self.show.toggle()
+//              }
+//            }
+//        }
+   // }
   }
 }
 
 struct CompletedPopUp: View {
-  var body: some View {
-    ZStack(alignment: .topLeading){
-      Completed()
-      VStack(alignment: .leading, spacing: 17){
-        HStack(spacing: 8){
-          Image("Image 33")
-          Text("Restore")
-            .font(.system(size: 16, weight: .medium, design: .default))
-            .padding(.bottom, 6)
-        }
-        HStack{
-          Image("Image 32")
-          Text("Delete")
-            .font(.system(size: 16, weight: .medium, design: .default))
-            .padding(.bottom, 6)
-        }
-      }.padding(.vertical, 26)
-        .padding(.leading, 25)
-        .padding(.trailing, 22)
-        .background(.color("FFFFFF"))
-        .cornerRadius(14)
-        .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
-        .padding(.leading, 64)
-        .padding(.top, 283)
+      var body: some View {
+        
+        VStack(alignment: .leading, spacing: 17){
+          HStack(spacing: 8){
+            Image("Image 33")
+            Text("Restore")
+              .font(.system(size: 16, weight: .medium, design: .default))
+              .padding(.bottom, 6)
+          }
+          HStack{
+            Image("Image 32")
+            Text("Delete")
+              .font(.system(size: 16, weight: .medium, design: .default))
+              .padding(.bottom, 6)
+          }
+        }.padding(.vertical, 26)
+          .padding(.leading, 25)
+          .padding(.trailing, 22)
+          .background(.color("FFFFFF"))
+          .cornerRadius(14)
+          .shadow(color: .color("F1F7FF"), radius: 13, x: -3, y: 7)
+        //        .padding(.leading, 64)
+        //        .padding(.top, 283)
+     
     }
   }
-}
+
 struct CompletedPopUp_Previews: PreviewProvider {
   static var previews: some View {
     CompletedPopUp()

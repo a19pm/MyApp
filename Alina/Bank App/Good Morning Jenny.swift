@@ -80,8 +80,8 @@ struct GoodMorningJenny: View {
                 Spacer()
                 
             }
-            CardView(isSelected: false, bank: "Redblue", paymentProcessor: "Mastercard", name: "Jenny Barnes", cardNumber: "5868", currency: "$", balance: "2,345", pense: "34")
-            CardView(isSelected: false, bank: "Redblue", paymentProcessor: "Mastercard", name: "Jenny Barnes", cardNumber: "5868", currency: "$", balance: "2,345", pense: "34")
+            CardView(bank: "Redblue", paymentProcessor: "Mastercard", name: "Jenny Barnes", cardNumber: "5868", currency: "$", balance: "2,345", pense: "34")
+            CardView(bank: "Redblue", paymentProcessor: "Mastercard", name: "Jenny Barnes", cardNumber: "5868", currency: "$", balance: "2,345", pense: "34")
         }.background(.color("F5F5F5"))
     }
 }

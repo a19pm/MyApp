@@ -26,27 +26,9 @@ struct FavouriteScreen: View {
             .font(.system(size: 14, weight: .regular, design: .default))
             .foregroundColor(.color("616161"))
           HStack(spacing: 14){
-            Text("All")
-              .font(.system(size: 12, weight: .regular, design: .default))
-              .foregroundColor(.color("FFFFFF"))
-              .padding(10)
-              .background(.color("3544C4"))
-              .cornerRadius(6)
-              .shadow(color: .color("3544C4").opacity(0.6), radius: 34, x: 10, y: 32)
-            Text("Action")
-              .font(.system(size: 12, weight: .regular, design: .default))
-              .foregroundColor(.color("616161"))
-              .padding(10)
-              .background(.color("FFFFFF"))
-              .cornerRadius(6)
-              .shadow(color: .color("35405A").opacity(0.3), radius: 24, x: 0, y: 22)
-            Text("Adventure")
-              .font(.system(size: 12, weight: .regular, design: .default))
-              .foregroundColor(.color("616161"))
-              .padding(10)
-              .background(.color("FFFFFF"))
-              .cornerRadius(6)
-              .shadow(color: .color("35405A").opacity(0.3), radius: 24, x: 0, y: 22)
+            GenresFavourite(genre: "All")
+            GenresFavourite(genre: "Action")
+            GenresFavourite(genre: "Adventure")
           }.padding(.top, 16)
         }
         Spacer()
@@ -63,7 +45,24 @@ struct FavouriteScreen_Previews: PreviewProvider {
     FavouriteScreen()
   }
 }
-
+struct GenresFavourite: View {
+  var genre: String
+  @State var isSelected = false
+  var body: some View {
+    Button{
+      isSelected.toggle()
+    } label: {
+      Text(genre)
+            .font(.system(size: 12, weight: .regular, design: .default))
+            .foregroundColor(isSelected ? .color("FFFFFF") : .color("616161"))
+            .padding(10)
+            .background(isSelected ? .color("3544C4") : .color("FFFFFF"))
+            .cornerRadius(6)
+            .shadow(color: isSelected ? .color("3544C4") : .color("35405A").opacity(isSelected ? 0.6 : 0.3), radius: isSelected ? 34 : 24, x: isSelected ? 10 : 0, y: isSelected ? 32 : 22)
+    }
+    
+  }
+}
 struct MyfavBack: View {
   var body: some View {
     VStack{
@@ -81,6 +80,7 @@ struct FilmCard: View {
   var hours: String
   var isSecondGenre: Bool
   var genre2: String
+  @State var isLiked = false
   var body: some View {
     VStack(alignment: .leading, spacing: 24){
       HStack(alignment: .center, spacing: 28){
@@ -94,11 +94,16 @@ struct FilmCard: View {
               .frame(width: 118, height: 144)
               .mask(Rectangle().cornerRadius(13).frame(width: 118, height: 144))
           }
-          Image("i 39")
-            .padding(9)
-            .background(.ultraThinMaterial)
-            .cornerRadius(16)
-            .padding(12)
+          Button {
+            isLiked.toggle()
+          } label: {
+            Image(isLiked ? "i 39" : "i 17")
+            // Image("i 39")
+              .padding(9)
+              .background(.ultraThinMaterial)
+              .cornerRadius(16)
+              .padding(12)
+          }
         }
         VStack(alignment: .leading,spacing: 5) {
           Text("\(name) :\n\(producer)")
@@ -152,6 +157,7 @@ struct FilmCard: View {
 }
 
 struct PersonalizeScreen: View {
+  @State var book = false
   var body: some View {
     VStack{
       HStack{
@@ -221,7 +227,7 @@ struct PersonalizeScreen: View {
     }.padding(.top, 21)
       .padding(.horizontal, 20)
     .safeAreaInset(edge: .bottom) {
-      Bac(text: "CONTINUE")
+      Bac(text: "CONTINUE", bookNow: $book)
     }.edgesIgnoringSafeArea(.bottom)
   }
 }
@@ -233,118 +239,150 @@ struct PerssonalizeScreen_Previews: PreviewProvider {
 
 struct GenreCard: View {
   var genre: String
-  var isSelected: Bool
+ @State var isSelected = false
   var body: some View {
-    Text(genre)
-      .font(.system(size: 12.48, weight: .regular, design: .default))
-      .foregroundColor(isSelected ? .white : .color("616161"))
-      .padding(.horizontal, 23).padding(.vertical, 10)
-      .background(isSelected ? .color("3544C4") : .color("F5F6F7"))
-      .cornerRadius(4.16)
-      .shadow(color: isSelected ? .color("3544C4").opacity(0.6) : .clear , radius: 34, x: 10, y: 32)
+    Button {
+      isSelected.toggle()
+    } label: {
+      Text(genre)
+            .font(.system(size: 12.48, weight: .regular, design: .default))
+            .foregroundColor(isSelected ? .white : .color("616161"))
+            .padding(.horizontal, 23).padding(.vertical, 10)
+            .background(isSelected ? .color("3544C4") : .color("F5F6F7"))
+            .cornerRadius(4.16)
+            .shadow(color: isSelected ? .color("3544C4").opacity(0.6) : .clear , radius: 34, x: 10, y: 32)
+    }
+    }
+    
   }
-}
+
 
 struct ProfileScreen: View {
+  @State var showSettings = false
   var body: some View {
-    VStack{
-      HStack(alignment: .top){
-        Spacer()
-        VStack(spacing: 0){
-          ZStack(alignment: .topTrailing){
-            ZStack{
-              Circle().frame(width: 109).foregroundColor(.color("464646")).shadow(color: .color("4C1216").opacity(0.7), radius: 34, x: 0, y: 32)
-              Image("i 45")
+    ZStack{
+      VStack{
+        HStack(alignment: .top){
+          Spacer()
+          VStack(spacing: 0){
+            ZStack(alignment: .topTrailing){
+              ZStack{
+                Circle().frame(width: 109).foregroundColor(.color("464646")).shadow(color: .color("4C1216").opacity(0.7), radius: 34, x: 0, y: 32)
+                Image("i 45")
+              }
+              Image("i 46")
+                .padding(9)
+                .background(.color("38A971")).cornerRadius(20)
+                .overlay(Circle().stroke(Color.color("FFFFFF"), lineWidth: 3))
+                .offset(x: 0 , y: 5)
             }
-            Image("i 46")
-              .padding(9)
-              .background(.color("38A971")).cornerRadius(20)
-              .overlay(Circle().stroke(Color.color("FFFFFF"), lineWidth: 3))
-              .offset(x: 0 , y: 5)
+            Text("Jessica Liu")
+              .font(.system(size: 24, weight: .semibold, design: .default))
+              .foregroundColor(.color("35405A"))
+              .padding(.top, 26)
+              .padding(.bottom, 9)
+            Text("@Jeje_liu")
+              .font(.system(size: 14, weight: .regular, design: .default))
+              .foregroundColor(.color("B2B6C0"))
+          }.padding(.top, 5).padding(.leading, 24)
+          Spacer()
+          Button{
+            showSettings.toggle()
+          } label: {
+            Image("i 47")
           }
-          Text("Jessica Liu")
-            .font(.system(size: 24, weight: .semibold, design: .default))
-            .foregroundColor(.color("35405A"))
-            .padding(.top, 26)
-            .padding(.bottom, 9)
-          Text("@Jeje_liu")
-            .font(.system(size: 14, weight: .regular, design: .default))
-            .foregroundColor(.color("B2B6C0"))
-        }.padding(.top, 5).padding(.leading, 24)
-        Spacer()
-        Image("i 47")
-      }
-      HStack{
-        HStack(spacing: 0){
-          Image("i 48")
+        }
+        HStack{
+          HStack(spacing: 0){
+            Image("i 48")
+            VStack{
+              Text("44920")
+                .font(.system(size: 12, weight: .bold, design: .default))
+                .foregroundColor(.color("35405A").opacity(0.8))
+              Text("Place")
+                .font(.system(size: 12, weight: .bold, design: .default))
+                .foregroundColor(.color("35405A").opacity(0.38))
+            }
+            Image("i 53")
+          }
+          Spacer()
           VStack{
-            Text("44920")
-              .font(.system(size: 12, weight: .bold, design: .default))
-              .foregroundColor(.color("35405A").opacity(0.8))
-            Text("Place")
+            Text("03")
+              .font(.system(size: 16, weight: .semibold, design: .default))
+              .foregroundColor(.color("35405A"))
+            Text("Want")
               .font(.system(size: 12, weight: .bold, design: .default))
               .foregroundColor(.color("35405A").opacity(0.38))
           }
-          Image("i 53")
-        }
-        Spacer()
-        VStack{
-          Text("03")
-            .font(.system(size: 16, weight: .semibold, design: .default))
-            .foregroundColor(.color("35405A"))
-          Text("Want")
-            .font(.system(size: 12, weight: .bold, design: .default))
-            .foregroundColor(.color("35405A").opacity(0.38))
-        }
-        Spacer()
-        VStack{
-          Text("02")
-            .font(.system(size: 16, weight: .semibold, design: .default))
-            .foregroundColor(.color("35405A"))
-          Text("Watched")
-            .font(.system(size: 12, weight: .bold, design: .default))
-            .foregroundColor(.color("35405A").opacity(0.38))
-        }
-        Spacer()
-        VStack{
-          Text("08")
-            .font(.system(size: 16, weight: .semibold, design: .default))
-            .foregroundColor(.color("35405A"))
-          Text("Series")
-            .font(.system(size: 12, weight: .bold, design: .default))
-            .foregroundColor(.color("35405A").opacity(0.38))
-        }
-      }.padding(.top, 26).padding(.bottom, 18).padding(.leading, 20).padding(.trailing, 18)
-        .background(.white)
-        .cornerRadius(8)
-        .shadow(color: .color("35405A").opacity(0.5), radius: 74, x: 0, y: 52)
-        .padding(.vertical, 31)
-      VStack(alignment: .leading){
-        HStack(alignment: .top, spacing: 9){
-          GenreCard2(genre: "Want", isSelected: true)
-          GenreCard2(genre: "Watched", isSelected: false)
-          GenreCard2(genre: "Series", isSelected: false)
           Spacer()
-          Image("i 54")
-            .padding(8).padding(.leading, 2).padding(.top, 1)
-            .background()
-            .cornerRadius(6)
-            .shadow(color: .color("35405A").opacity(0.13), radius: 24, x: 0, y: 22)
-        }
-        HStack{
-          WantMovieCard(image: "i 49", rate: "7.2")
+          VStack{
+            Text("02")
+              .font(.system(size: 16, weight: .semibold, design: .default))
+              .foregroundColor(.color("35405A"))
+            Text("Watched")
+              .font(.system(size: 12, weight: .bold, design: .default))
+              .foregroundColor(.color("35405A").opacity(0.38))
+          }
           Spacer()
-          WantMovieCard(image: "i 50", rate: "7.2")
-        }.padding(.top, 26)
-      }.frame(maxWidth: .infinity)
-        .padding(.top, 23)
-        .padding(.leading, 32)
-        .padding(.trailing, 30)
-        .background(.white) //.padding(.horizontal, -30)
-        .cornerRadius(31, corners: [.topLeft, .topRight])
-        .padding(.horizontal, -30)
-      Spacer()
-    }.padding(.top, 21).padding(.horizontal, 30)
+          VStack{
+            Text("08")
+              .font(.system(size: 16, weight: .semibold, design: .default))
+              .foregroundColor(.color("35405A"))
+            Text("Series")
+              .font(.system(size: 12, weight: .bold, design: .default))
+              .foregroundColor(.color("35405A").opacity(0.38))
+          }
+        }.padding(.top, 26).padding(.bottom, 18).padding(.leading, 20).padding(.trailing, 18)
+          .background(.white)
+          .cornerRadius(8)
+          .shadow(color: .color("35405A").opacity(0.5), radius: 74, x: 0, y: 52)
+          .padding(.vertical, 31)
+        VStack(alignment: .leading){
+          HStack(alignment: .top, spacing: 9){
+            GenreCard2(genre: "Want", isSelected: true)
+            GenreCard2(genre: "Watched", isSelected: false)
+            GenreCard2(genre: "Series", isSelected: false)
+            Spacer()
+            Image("i 54")
+              .padding(8).padding(.leading, 2).padding(.top, 1)
+              .background()
+              .cornerRadius(6)
+              .shadow(color: .color("35405A").opacity(0.13), radius: 24, x: 0, y: 22)
+          }
+          HStack{
+            WantMovieCard(image: "i 49", rate: "7.2")
+            Spacer()
+            WantMovieCard(image: "i 50", rate: "7.2")
+          }.padding(.top, 26)
+        }.frame(maxWidth: .infinity)
+          .padding(.top, 23)
+          .padding(.leading, 32)
+          .padding(.trailing, 30)
+          .background(.white) //.padding(.horizontal, -30)
+          .cornerRadius(31, corners: [.topLeft, .topRight])
+          .padding(.horizontal, -30)
+        Spacer()
+      }.padding(.top, 21).padding(.horizontal, 30)
+      if self.showSettings {
+          //Spacer()
+          GeometryReader { _ in
+            SettingsProfile()
+          }//.frame(maxWidth: .infinity)
+          //.frame(alignment: .trailing)
+//              .padding(.leading, 182)
+           //.padding(.top, -35)
+          .frame(maxHeight: .infinity)
+          .background {
+            Color.black.opacity(0)
+              .edgesIgnoringSafeArea(.all)
+              .onTapGesture {
+                withAnimation {
+                  self.showSettings.toggle()
+                }
+              }
+          }
+      }
+    }
   }
 }
 struct ProfileScreen_Previews: PreviewProvider {
@@ -357,6 +395,7 @@ struct ProfileScreen_Previews: PreviewProvider {
 struct WantMovieCard: View {
   var image: String
   var rate: String
+  @State var isLiked = false
  
   var body: some View {
     ZStack(alignment: .top){
@@ -381,14 +420,18 @@ struct WantMovieCard: View {
           .cornerRadius(12.01)
         
         Spacer()
-        Image("i 17")
-          .resizable()
+        Button {
+          isLiked.toggle()
+        } label: {
+          Image(isLiked ? "i 39" : "i 17")
+            .resizable()
             .frame(width: 11, height: 10)
-          .padding(6)
+            .padding(6)
             .padding(.horizontal, 2)
-            //.background(.white.opacity(0.19))
+          //.background(.white.opacity(0.19))
             .background (.ultraThinMaterial)
             .cornerRadius(12)
+        }
       }.padding(15)
     }.frame(width: 155, height: 196)
   }
@@ -396,15 +439,20 @@ struct WantMovieCard: View {
 
 struct GenreCard2: View {
   var genre: String
-  var isSelected: Bool
+  //var isSelected: Bool
+  @State var isSelected = false
   var body: some View {
-    Text(genre)
-      .font(.system(size: 12.48, weight: .regular, design: .default))
-      .foregroundColor(isSelected ? .white : .color("616161"))
-      .padding(.horizontal, 12).padding(.vertical, 10)
-      .background(isSelected ? .color("3544C4") : .color("F5F6F7"))
-      .cornerRadius(4.16)
-      .shadow(color: isSelected ? .color("3544C4").opacity(1) : .clear , radius: 34, x: 10, y: 32)
+    Button{
+      isSelected.toggle()
+    } label: {
+      Text(genre)
+        .font(.system(size: 12.48, weight: .regular, design: .default))
+        .foregroundColor(isSelected ? .white : .color("616161"))
+        .padding(.horizontal, 12).padding(.vertical, 10)
+        .background(isSelected ? .color("3544C4") : .color("F5F6F7"))
+        .cornerRadius(4.16)
+        .shadow(color: isSelected ? .color("3544C4").opacity(1) : .clear , radius: 34, x: 10, y: 32)
+    }
   }
 }
 
@@ -438,19 +486,8 @@ struct SettingsProfile: View {
                 .font(.system(size: 19, weight: .regular, design: .default))
                 .foregroundColor(.color("353535").opacity(0.4))
               HStack(spacing: 13){
-                Text("Male")
-                  .font(.system(size: 12, weight: .regular, design: .default))
-                  .foregroundColor(.white)
-                  .frame(width: 87, height: 34)
-                  .background(.color("3544C4"))
-                  .cornerRadius(6)
-                Text("Female")
-                  .font(.system(size: 12, weight: .regular, design: .default))
-                  .foregroundColor(.color("616161"))
-                  .frame(width: 87, height: 34)
-                  .overlay(RoundedRectangle(cornerRadius: 6)
-                    .stroke(.color("979797"), lineWidth: 0.5 ))
-                  .cornerRadius(6)
+               GenderView(gender: "Male")
+                GenderView(gender: "Female")
                 Spacer()
               }
             }.padding(.bottom, 5.5)
@@ -465,6 +502,38 @@ struct SettingsProfile: View {
         BackgroundMovie42()
     }.background(.black)
     //.ignoresSafeArea()
+  }
+}
+struct GenderView: View {
+  var gender: String
+  @State var isSelected = false
+  var body: some View {
+    Button {
+      isSelected.toggle()
+    } label: {
+      Text(gender)
+        .font(.system(size: 12, weight: .regular, design: .default))
+        .foregroundColor(isSelected ? .white : .color("616161"))
+        .frame(width: 87, height: 34)
+        .background(isSelected ? .color("3544C4") : .clear)
+        .overlay(RoundedRectangle(cornerRadius: 6)
+          .stroke(isSelected ? .color("979797") : .clear, lineWidth: isSelected ? 0 : 0.5 ))
+        .cornerRadius(6)
+    }
+//    Text(gender)
+//      .font(.system(size: 12, weight: .regular, design: .default))
+//      .foregroundColor(isSelected ? .white : .color("616161"))
+//      .frame(width: 87, height: 34)
+//      .background(isSelected ? .color("3544C4") : .clear)
+//      .overlay(RoundedRectangle(cornerRadius: 6)
+//        .stroke(isSelected ? .color("979797") : .clear, lineWidth: isSelected ? 0 : 0.5 ))
+//      .cornerRadius(6)
+//    Text("Female")
+//      .font(.system(size: 12, weight: .regular, design: .default))
+//      .foregroundColor(.color("616161"))
+//      .frame(width: 87, height: 34)
+//
+//      .cornerRadius(6)
   }
 }
 struct SettingsProfile_Previews: PreviewProvider {
